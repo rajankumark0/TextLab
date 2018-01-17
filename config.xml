@@ -29,7 +29,7 @@
 		 <plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />
 		
 		<!-- <plugin name="cordova-plugin-file-transfer" spec="~1.7.0" />-->
-		<gap:plugin name="cordova-plugin-file-transfer" source="npm" />
+		
 		 
 		<!--<plugin name="cordova-plugin-file" spec="~6.0.1" />-->
 		 
