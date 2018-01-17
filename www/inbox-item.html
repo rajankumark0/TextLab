@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+    		<script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+<script>
+	
+ var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+    function setvalue()
+		{
+		       				 		            
+			setuserinfo(logged_in);	
+			
+			 getitem(0);	
+			
+		
+		}
+	function getitem(pageno)
+		   {
+		   
+		          var quicksentid= window.localStorage.getItem("quicksentid");
+					 
+					   
+		   
+		          $.ajax({
+							type:'POST',
+							url:"http://manage.staticking.net/index.php/servicessms/quicksentsmsdetailapi",
+							data:'logged_in='+logged_in+'&quicksentid='+quicksentid+'&pageno='+pageno,
+							
+							success:function(data)
+							{
+								
+								$(".item").html(data);
+							}
+						  });
+
+		   
+		   
+		   }
+		   
+		   function getitemafterscroll(pageno)
+		   {
+		   
+		          var quicksentid= window.localStorage.getItem("quicksentid");
+					 
+					   
+		   
+		          $.ajax({
+							type:'POST',
+							url:"http://manage.staticking.net/index.php/servicessms/quicksentsmsdetailapi",
+							data:'logged_in='+logged_in+'&quicksentid='+quicksentid+'&pageno='+pageno,
+							
+							success:function(data)
+							{
+								
+								$(".item").append(data);
+							}
+						  });
+
+		   
+		   
+		   }
+	</script>	
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">Inbox Item</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+<div id="loginContainer">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="available-credits2">
+<div class="row compose item">
+  
+
+
+
+  <center style="top:0">
+  <img width="100" src="images/apache_pb2_ani.gif">
+  
+   </center>
+    <input type="hidden" id="routeid" name="routeid" >
+  <input type="hidden" id="senderid" name="senderid" >
+  <input type="hidden" id="contactnumberst" name="contactnumberst" >
+ <input type="hidden" value="textmsg" id="msgtype" name="msgtype" >
+  
+  
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+<div class="available-credits2">
+<div class="row compose smsm" style="background:#fff;">
+  
+
+  
+<div class="col-sm-12">
+
+<textarea class="form-control composse-box" rows="3" id="smscontent" placeholder="Text Message" style="margin:5px 0px;" onchange="countwords();" onkeydown="countwords(); " onclick="countwords();" onkeyup="countwords();" onfocus="countwords();" onkeypress="countwords();" onmouseover="countwords();" onmousemove="countwords();" ></textarea>
+<label class="red"><span id="wordsremain" class="red"></span> <span id="labelchar" class="red"> &nbsp;Characters&nbsp; </span> <span id="countsms" class="red"></span> <span id="labelsms" class="red"> &nbsp;SMS&nbsp; </span></label>
+
+<input type="hidden" id="countsmshidden" />
+</div>
+  
+  
+  <div class="col-md-12">
+<input type="submit" id="sendsmsfast" class="btn btn-primary inner-button" value="Send" style="margin-top:20px;">
+<span id="msgstatus"></span>
+</div>
+  
+  
+  
+  
+  
+</div>
+
+
+<style>
+.smsm {
+  position: fixed;
+  bottom: 60px;
+  
+}
+</style>
+
+
+
+
+
+
+</div>
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div id="footercredits" class="footer-credits">
+
+
+</div>
+
+
+
+
+</div>
+
+
+<script src="js/left-menuhtml.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+ 
+<script type="text/javascript" src="js/composesms.js"></script>
+
+<script type="text/javascript">
+
+$=jQuery;
+
+$(document).ready(function()
+
+{
+
+	$("#sendsmsfast").click(function()
+
+	{
+         
+		countwords();
+  
+		countwordcontact();
+          
+		
+
+		var routeid=$("#routeid").val();
+
+		var senderid=$("#senderid").val();
+
+		var contactnumberst=$("#contactnumberst").val();
+
+		var msgtype=$("#msgtype").val();
+
+		var smscontent=encodeURIComponent($("#smscontent").val());
+
+		var schedulenew=$("#schedulenew").val();
+
+		var totalsms=$("#countsmshidden").val();
+
+		var totalcontacts=$("#totalcontactrow").val();
+		
+		
+		if(senderid=='' && routeid=='Promotional' || senderid=='undefined' && routeid=='Promotional')
+		{
+			senderid='Default';
+		}
+		
+		if(senderid=='Default' && routeid=='Transactional' || senderid=='' && routeid=='Transactional')
+		{
+			$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Select Sender ID");
+			return false;
+		}
+		
+		if(senderid=='Default' && routeid=='Promosid' || senderid=='' && routeid=='Promosid')
+		{
+			$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Select Sender ID");
+			return false;
+		}
+		if(senderid=='Default' && routeid=='transactional2' || senderid=='' && routeid=='transactional2')
+		{
+			$("#bbalertd").fadeIn(10).addClass("alert-danger").text("Please Select Sender ID");
+			return false;
+		}
+		
+
+		if(routeid=='' || senderid=='' || contactnumberst=='' || msgtype=='' || smscontent=='' || totalsms=='' || totalcontacts=='')
+
+		{
+
+			$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Enter Required Values");
+
+			
+
+		}
+
+		else
+		{
+			if(totalcontacts > 50000)
+			{
+				alert("Enter Only 50000 Numbers");
+				return false;
+			}
+			else
+			{
+			if(routeid=='Promotional1' && $("#istendigitid").val()=='yes' && totalsms > 1)
+			{
+				alert("You Can Send Only 1 Sms(160 Characters) On this Route ");
+				return false;
+			}
+			else
+			{		
+datastring='routeid='+routeid+'&senderid='+senderid+'&contactnumberst='+contactnumberst+'&msgtype='+msgtype+'&smscontent='+smscontent+'&schedulenew='+schedulenew+'&totalsms='+totalsms+'&totalcontacts='+totalcontacts+'&logged_in='+logged_in;
+
+			$.ajax({
+
+					type:'POST',
+
+					url:'http://manage.staticking.net/index.php/servicessms/sendsmsapi',
+
+					data:datastring,
+
+					beforeSend:function()
+					{
+						$("#waitmsg").text("Please Wait. Sending Message.....");
+						
+						$("#faceoff").show();
+						$("#msgstatus").fadeIn(10).removeClass("alert-danger").addClass("alert-info").text("Please Wait, Sending Message.....");
+						$("#sendsmsfast").attr('disabled','disabled');
+						
+						
+					},
+
+					success:function(data)
+					{
+					   
+						$("#faceoff").hide();
+						$("#showloadf").click();
+						$("#waitmsg").fadeIn(10).html(data);
+						
+						$("#msgstatus").fadeIn(10).removeClass("alert-info").html(data);
+						$("#sendsmsfast").removeAttr('disabled');
+						$(".close").removeAttr('disabled');
+						
+						$("#clsosebutton").show();
+						$("input,select,textarea").each(function()
+						{
+							$(this).val("");
+						});
+						$("#sendsmsfast").val("Send Message");
+						
+						getitem(0);
+						
+					}
+
+			});
+
+			}
+
+			
+			}
+		}
+
+		
+
+	});
+
+});
+
+</script>
+<script>
+
+var mincount = 20;
+var maxcount = 40;
+
+var counter=0;
+
+jQuery(window).scroll(function(e) 
+                    {
+						
+						
+                    if(jQuery(window).scrollTop() + jQuery(window).height() >= jQuery(document).height() - 100)
+						{
+							
+							
+													
+								
+							
+					
+					var totpro=jQuery('.pro').length;
+	
+	                    getitemafterscroll(totpro);
+							
+				         
+                          
+                      }
+					  
+					
+});
+
+</script>
+
+</body>
+</html>

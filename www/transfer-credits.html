@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+  
+  <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+  
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+
+<script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+   
+ 
+		if(window.localStorage.getItem("loggedIn")==1) 
+		{ 
+		 //alert('ram2');
+		}
+		else{ 
+
+		window.location.href="login.html";
+
+
+
+		}
+		
+		
+		function setvalue()
+		{
+		
+			if(!logged_in) 
+			{ 
+			 logout();
+			}
+			
+		            setuserinfo(logged_in);
+					
+				
+                getpagehtml();
+      	
+
+				  
+		}
+		
+		function getpagehtml()
+		{
+            $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/services/transfercreditsapi",
+				data:'logged_in='+logged_in,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+				}
+		      });
+
+			  
+		}
+		
+		
+		
+</script>
+
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">Transfer Credits</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+<div id="loginContainer">
+
+
+</div></div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose item">
+
+<div class="col-sm-6 col-xs-6"><label>Select Route</label>
+<select class="form-control" id="routeid" required="">
+
+                                                <option value="">Select Route</option>
+
+                                                
+
+                                               
+
+                                                <option value="UHJvbW90aW9uYWw=">Promotional</option>
+												<option value="YXBpUHJvbW90aW9uYWw=">API Promotional</option>
+                                                <option value="UHJvbW90aW9uYWwx">Promotional 1</option>
+                                                
+
+                                                <option value="cHJvbW9zZW5kZXJpZA==">Promo S.ID</option>
+												<option value="YXBpcHJvbW9zZW5kZXJpZA==">API Promo S.ID</option>
+                                                
+
+                                                <option value="VHJhbnNhY3Rpb25hbA==">Transactional</option>
+												<option value="YXBpVHJhbnNhY3Rpb25hbA==">API Transactional</option>
+                                                
+                                                <option value="dm9pY2VzbXM=">Voice SMS</option>
+												
+                                                
+
+                                                 <option value="c29jaWFsbWVkaWE=">Social Media</option>
+                                                                                                  <option value="YW5kcm9pZGFwcA==">Android App</option>
+                                                 <option value="VHJhbnNhY3Rpb25hbDI=">Transactional 2</option>
+                                                 <option value="aW50ZXJuYXRpb25hbA==">International</option>
+                                                </select>
+
+</div>
+
+
+
+<div class="col-sm-6 col-xs-6"><label>Sender Username</label>
+<select id="transtype" class="form-control">
+
+<option value="">Select</option>
+
+
+
+</select>
+
+</div>
+
+<div class="col-sm-6 col-xs-6"><label>Transfer Type</label>
+<select id="transtype" class="form-control" onchange="return transcredits()" required="">
+
+                                                <option value="">Select </option>
+												
+                                                <option value="add">Add Credits</option>
+												
+                                                <option value="deduct">Deduct Credits</option>
+
+                                                </select>
+
+</div>
+
+
+<div class="col-sm-6 col-xs-6"><label>Credits</label>
+<select id="creditstype" class="form-control" required="">
+
+<option value="">Select Credits</option>
+
+<!--<option value="actual">Actual Credits</option>-->
+<option value="virtual">Credits</option>
+
+</select>
+
+</div>
+
+<div class="col-sm-6 col-xs-6"><label>Volume</label>
+<input type="text" name="text" class="form-control input-box" placeholder="Volume" required>
+
+</div>
+
+<div class="col-sm-6 col-xs-6"><label>Password</label>
+<input type="Password" name="Password" class="form-control input-box" placeholder="Password" required>
+
+</div>
+
+<div class="col-sm-12 col-xs-12"><label>Note</label>
+<textarea class="form-control composse-box" rows="3" placeholder="" style="margin:5px 0px;"></textarea>
+
+</div>
+
+
+
+
+
+<div class="col-md-12">
+<input type="submit" id="sendsmsfast" class="btn btn-primary inner-button" value="Transfer Credits" style="margin-top:20px;">
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div class="footer-credits" id="footercredits">
+
+
+</div>
+
+
+
+
+</div>
+
+<script src="js/jquery-1.11.2.min.js"></script>
+
+
+<script src="js/left-menuhtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+
+<script type="text/javascript" src="js/transfercredits.js"> </script>
+
+
+
+
+<script type="text/javascript">
+function transfercredits()
+{
+
+	$=jQuery;
+
+username= $("#username").val();
+
+transfertype= $("#transtype").val();
+
+creditstype=$("#creditstype").val();
+
+volume= $("#volumeofcredits").val();
+
+routeid= $("#routeid").val();
+
+creditprice= $("#pricing").val();
+
+credittax= $("#taxonsms").val();
+
+creditamt= $("#totalamt").val();
+
+password= $("#password").val();
+note= $("#note").val();
+
+
+
+if(transfertype=='add' || transfertype=='')
+
+{
+
+if(transfertype=='' || username=='' || volume=='' || routeid=='' || creditprice=='' || credittax=='' || creditamt=='' || password=='' || creditstype=='')
+	{
+		$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Enter Required values");
+		return false;
+	}
+}
+
+else
+
+{
+
+	if(transfertype=='deduct' || transfertype=='')
+
+	{
+
+		if(transfertype=='' || username=='' ||  volume=='' || routeid=='' || password=='' || creditstype=='')
+
+		{
+
+		$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Enter Required values");	
+
+		return false;
+
+		}
+
+	}
+
+	
+
+}
+
+
+
+
+
+datastring='username='+username+'&transfertype='+transfertype+'&volume='+volume+'&routeid='+routeid+'&creditprice='+creditprice+'&credittax='+credittax+'&creditamt='+creditamt+'&password='+password+'&creditstype='+creditstype+'&note='+note+'&logged_in='+logged_in;
+
+
+			$.ajax(
+
+			{
+
+				type:'POST',
+
+				url:'http://manage.staticking.net/index.php/services/addcreditsapi',
+
+				data:datastring,
+
+				beforeSend: function()
+				{
+					
+					
+					$("#showloadf").click();
+					$("#showthereload").show();
+					$("#msgstatus").fadeIn(10).removeClass("alert-danger").addClass("alert-info").text("Please Wait..");
+					$("#sendsmsfast").attr('disabled','disabled');
+				},
+				
+				success:function(data)
+
+				{
+
+					$("#showthereload").hide();
+									$("#waitmsg").fadeIn(10).html(data);
+									
+									$("#msgstatus").fadeIn(10).removeClass("alert-info").html(data);
+									$("#sendsmsfast").removeAttr('disabled');
+									$(".close").removeAttr('disabled');
+									
+									$("#clsosebutton").show();
+					$("#password").val("");
+
+					$("#volume").val("");
+
+				}
+
+			} );
+
+
+
+
+
+
+
+}
+
+</script>
+</body>
+</html>

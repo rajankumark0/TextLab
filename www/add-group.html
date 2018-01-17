@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+
+       <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()" >
+<script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+   
+ 
+		if(window.localStorage.getItem("loggedIn")==1) 
+		{ 
+		 //alert('ram2');
+		}
+		else{ 
+
+		window.location.href="login.html";
+
+
+
+		}
+		
+		
+		function setvalue()
+		{
+		
+			if(!logged_in) 
+			{ 
+			 logout();
+			}
+			
+		          setuserinfo(logged_in);
+										
+	             
+
+              
+      		document.querySelector("#pickContact").addEventListener("touchend", doContactPicker, false);
+				  
+		}
+		
+	   	function doContactPicker() {
+		
+	navigator.contacts.pickContact(function(contact){
+		console.log('The following contact has been selected:' + JSON.stringify(contact));
+		//Build a simple string to display the Contact - would be better in Handlebars
+		var entry = 0;
+		
+
+		 var txt =jQuery('#contactnumberst').val();
+		 
+		if(contact.phoneNumbers && contact.phoneNumbers.length) {
+			entry=contact.phoneNumbers[0].value;
+			
+			entry=entry.replace(/\s/g, "") ;
+			
+			entry=entry.replace(/[^0-9 ]/g, "");
+			
+			 
+												   
+						   entry= entry.substr(entry.length - 10);
+						   
+						   
+						   if(txt!='')
+								{
+								  var textval=txt+'\n'+entry;
+								}else
+								{
+								  var textval=entry;
+								}
+						   
+						   
+		}
+
+			
+		 jQuery('#contactnumberst').val(textval);	
+			
+	},function(err){
+		console.log('Error: ' + err);
+	});
+}
+		
+</script>
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">Add Group</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+<div id="loginContainer">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose">
+<div class="col-sm-12 col-xs-12">
+<label>Group Name</label>
+<input type="text" name="groupname" id="groupname" class="form-control input-box" placeholder="">
+
+</div>
+
+
+
+
+<div class="col-sm-12">
+<label>Contact No (One/Line)</label>
+<textarea class="form-control composse-box" id="contactnumberst" rows="3" placeholder="" style="margin:5px 0px;" onchange="countwordcontact();" onmouseover="countwordcontact();" onkeyup="countwordcontact();" onkeydown="countwordcontact();"></textarea>
+<label class="red" id="totalcontacts">Total Contact No's: 0)</label><input type="hidden" id="totalcontactrow" />
+</div>
+    <div class="col-md-8" style="display:none;">
+
+								<form method="post" id="fileuploadform" action="http://manage.staticking.net/index.php/servicessms/uploadcontactsapi" enctype="multipart/form-data">
+
+										  <input type="file" id="contactnosfile" name="contactnosfile" >
+
+								 </form>
+
+					</div>
+<div class="col-md-12">
+
+<button type="button" style="margin-top:5px;" id="fileupload" onclick="document.getElementById('contactnosfile').click();" class="btn btn-primary" title="Upload File"><i class="fa fa-upload"></i></button>
+
+<button type="button" style="margin-top:5px;margin-left:0px;" id="countnos" onclick="countwordcontact();" class="btn btn-info" title="Count No's"><i class="fa fa-tags"></i></button>
+
+
+
+<button type="button" style="margin-top:5px;margin-left:0px;" id="clearall" onclick="document.getElementById('contactnumberst').value='';" title="Clear All" class="btn btn-danger"><i class="fa fa-eraser"></i></button>
+
+
+
+<button type="button" style="margin-top:5px;margin-left:0px;" id="removeduplicate" class="btn btn-warning" title="Remove Duplicate Numbers"><i class="fa fa-minus"></i></button>
+
+
+
+<button type="button" style="margin-top:5px;margin-left:0px;" id="pickContact" class="btn btn-warning" title="Numbers">C</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="col-sm-12">
+<label>Name (Optional) 1/line</label>
+<textarea class="form-control composse-box" rows="3" id="customernames" placeholder="" style="margin:5px 0px;"></textarea>
+
+</div>
+
+
+
+<div class="col-md-12" style="margin-top:15px; float:left;">
+<input type="submit" id="sendsmsfastt" class="btn btn-primary inner-button" value="Add Group">
+<span id="msgstatus"></span>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div class="footer-credits" id="footercredits">
+
+
+</div>
+
+
+
+
+</div>
+
+
+<script src="js/jquery-1.11.2.min.js"></script>
+
+<script src="js/left-menuhtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+<script src="js/functions.js"></script>
+<script type="text/javascript">
+$=jQuery;
+$(document).ready(function()
+{
+	$("#sendsmsfastt").click(function()
+	{
+		groupname=$("#groupname").val();
+		
+		contactnumberst=$("#contactnumberst").val();
+		customernames=$("#customernames").val();
+
+			if(groupname=='' || contactnumberst=='')
+			{
+				$("#msgstatus").fadeIn(10).addClass("alert-danger").html("Please Enter Required Values");	
+			}
+			else
+			{
+				datastring='groupname='+groupname+'&contactnumberst='+contactnumberst+'&customernames='+customernames+'&logged_in='+logged_in;
+
+				$.ajax({
+
+					type:'POST',
+
+					url:'http://manage.staticking.net/index.php/servicessms/addnewgroupapi',
+
+					data:datastring,
+
+					beforeSend:function()
+					{
+						$("#msgstatus").fadeIn(10).removeClass("alert-danger").addClass("alert-info").text("Please Wait...");
+						$("#sendsmsfastt").attr('disabled','disabled');
+					},
+
+					success:function(data)
+					{
+						$("#msgstatus").fadeIn(10).removeClass("alert-info").addClass('alert-success').html(data);
+						$("#sendsmsfastt").removeAttr('disabled');
+					}
+
+				});
+			
+			}
+
+	});
+
+	
+
+});
+</script>
+<script type="text/javascript">
+
+
+var files;
+
+// Add events
+jQuery('#contactnosfile').on('change', prepareUpload);
+
+// Grab the files and set them to our variable
+function prepareUpload(event)
+{
+  files = event.target.files;
+  
+  
+  event.stopPropagation(); // Stop stuff happening
+    event.preventDefault(); // Totally stop stuff happening
+
+// START A LOADING SPINNER HERE
+
+// Create a formdata object and add the files
+var data = new FormData();
+$.each(files, function(key, value)
+{
+    data.append(key, value);
+});
+
+ jQuery('#faceoff').show();
+$.ajax({
+    url: 'http://manage.staticking.net/index.php/servicessms/uploadcontactsapi',
+    type: 'POST',
+    data: data,
+   
+    processData: false, // Don't process the files
+    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+    success: function(data, textStatus, jqXHR)
+    {
+	
+	jQuery('#faceoff').hide();
+				if(data=='No')
+				{
+				  
+				
+				alert('Please select valide csv');
+				
+				}else
+				{
+				
+				 jQuery('#contactnumberst').val(data);
+				}
+     
+					  
+    },
+    error: function(jqXHR, textStatus, errorThrown)
+    {
+        // Handle errors here
+        console.log('ERRORS: ' + textStatus);
+        // STOP LOADING SPINNER
+    }
+});
+
+  
+  
+  
+  
+}
+
+
+  
+	
+
+
+    </script>
+</body>
+</html>

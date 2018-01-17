@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+<script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+
+		if(window.localStorage.getItem("loggedIn") == 1) 
+		{ 
+		// alert('ram1');
+		}
+		else{  window.location.href="login.html"; }
+		
+		
+		function setvalue()
+		{
+		             
+				 setuserinfo(logged_in);
+							
+					
+
+                       getitem();					  
+
+
+						  
+					
+		}
+		
+				
+		function getitem()
+		   {
+		   
+		          var viewlongcode= window.localStorage.getItem("viewlongcode");
+					 
+					   
+		   
+		          $.ajax({
+							type:'POST',
+							url:"http://manage.staticking.net/index.php/servicessms/viewlongcodedetailsapi",
+							data:'logged_in='+logged_in+'&viewlongcode='+viewlongcode+'&pageno=0',
+							
+							success:function(data)
+							{
+								
+								$(".item").html(data);
+							}
+						  });
+
+		   
+		   
+		   }
+		
+		
+	function loaddata(pageno)
+			{
+			
+			  
+			   
+			   var curpage=(parseInt(pageno)-1)*10;
+			   
+			     var viewlongcode= window.localStorage.getItem("viewlongcode");
+					 
+					   
+		           
+		          $.ajax({
+							type:'POST',
+							url:"http://manage.staticking.net/index.php/servicessms/viewlongcodedetailsapi/"+logged_in+'/'+curpage,
+							data:'logged_in='+logged_in+'&viewlongcode='+viewlongcode+'&pageno='+pageno,
+							
+							success:function(data)
+							{
+								
+								$(".item").html(data);
+								
+							}
+						  });
+			
+			}
+	 
+		
+	</script>	
+
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">View Short Details</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+
+<div id="loginContainer">
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose">
+<div class="col-sm-12 col-xs-12">
+ 
+ 
+
+ <div class="row">
+    <div class="col-sm-6 col-xs-6" style="height:0px;">
+    <label>Search By Number</label>
+	<form id="searchbynumber" onsubmit="return smquerystring()">
+		<input type="text" id="sebynumber"  name="number" class="form-control input-box" placeholder="Search By Number" required>
+		<input type="submit" style="visibility:hidden">
+   </form>
+</div>
+
+
+
+<div class="col-sm-6 col-xs-6">
+<label>Sort By Circle</label>
+
+<select class="form-control" name="circle" id="circle" onchange="querystring(this.value)" required>
+<option value="">Select Circle</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Delhi Metro">Delhi Metro</option>
+<option value="Haryana">Haryana</option>
+<option value="Bihar And Jharkhand">Bihar And Jharkhand</option>
+<option value="West Bengal">West Bengal</option>
+<option value="Punjab">Punjab</option>
+<option value="Karnataka">Karnataka</option>
+<option value="MTNL Delhi">MTNL Delhi</option>
+<option value="Delhi">Delhi</option>
+<option value="Karnatak">Karnatak</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Uttar Pradesh West And Uttarak">Uttar Pradesh West And Uttarak</option>
+<option value="Madhya Pradesh And Chhattisgar">Madhya Pradesh And Chhattisgar</option>
+<option value="Uttar Pradesh East">Uttar Pradesh East</option>
+<option value="Delhi NCR">Delhi NCR</option>
+</select>
+
+
+</div>
+<div class="col-sm-6 col-xs-6">
+<label>Sort By Operator</label>
+<select class="form-control" name="operator" onchange="operatorquery(this.value)" required>
+<option value="">Select Operator</option>
+<option value="Airtel">Airtel</option>
+<option value="Vodafone">Vodafone</option>
+<option value="TATA Indicom">TATA Indicom</option>
+<option value="Reliance GSM">Reliance GSM</option>
+<option value="MTS">MTS</option>
+<option value="Idea">Idea</option>
+<option value="Aircel">Aircel</option>
+<option value="MTNL Delhi ">MTNL Delhi </option>
+<option value="BSNL">BSNL</option>
+<option value="Reliance Jio">Reliance Jio</option>
+<option value="TATA DOCOMO">TATA DOCOMO</option>
+<option value="Reliance CDMA">Reliance CDMA</option>
+<option value="Reliance GIO">Reliance GIO</option>
+<option value="Loop">Loop</option>
+</select>
+
+</div>
+<!--
+<div class="col-sm-6 col-xs-6">
+<label>From Date</label>
+<input type="text" name="text" class="form-control input-box" placeholder="From Date">
+
+</div>
+
+
+<div class="col-sm-6 col-xs-6">
+<label style="margin:0px 0px 11px 0px;">To Date</label>
+<input type="text" name="text" class="form-control input-box" placeholder="To Date">
+
+</div>
+
+<div class="col-sm-12 col-xs-12">
+
+
+
+</div>
+<div class="col-md-12">
+<input type="submit" id="sendsmsfast" class="btn btn-primary inner-button" value="Search" style="margin-bottom:20px !important;"> <a href="#" title="Export" class="btn inner-button" style="border-radius: 5px; color:#fff;
+    margin: 0px;"><i class="fa fa-download"></i></a>
+</div>-->
+
+</div>
+    
+
+
+</div>
+
+
+
+<div class="col-sm-12 col-xs-12">
+ 
+ 
+
+<hr>
+    
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="col-md-12" style="margin-top:25px;">
+<div style="overflow-x:auto;float: left;
+    width: 100%;">
+    
+    
+   <div class="table-responsive item">
+<table class="table table-bordered">
+
+       <tbody><tr>
+
+       <th>Id</th>
+       <th>Date/Time</th>
+       <th>Number</th>
+       <th>Keyword</th>
+       <th>Message</th>
+       <th>Circle</th>
+       <th>Operator</th>
+       </tr>
+
+       
+              <tr>
+       <td>177</td>
+       <td>10-01-2017 16:27:40</td>
+       <td>7290041013</td>
+       <td>DDSIL</td>
+       <td> DHALAO COMPLETE</td>
+       <td>Delhi Metro</td>
+       <td>Vodafone</td>
+       </tr>
+
+          
+       
+       
+
+       </tbody></table>
+       
+
+
+<a class="btn btn-info">1</a><a href="#" class="btn btn-default" data-ci-pagination-page="50" rel="start">2</a><a href="#" class="btn btn-default" data-ci-pagination-page="50" rel="next">&gt;</a>													
+</div> 
+
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div class="footer-credits" id="footercredits">
+
+</div>
+
+
+
+
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+
+
+<script src="js/left-menuhtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+<script src="js/on-click.js"></script>
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+
+<script>
+
+
+   function  smquerystring()
+			{
+			    var viewlongcode= window.localStorage.getItem("viewlongcode");
+					 
+					   var number=jQuery('#sebynumber').val();
+					   
+					   jQuery('#faceoff').show();
+		   
+		          $.ajax({
+							type:'POST',
+							url:"http://manage.staticking.net/index.php/servicessms/viewlongcodedetailsapi",
+							data:'logged_in='+logged_in+'&viewlongcode='+viewlongcode+'&pageno=0'+'&number='+number,
+							
+							success:function(data)
+							{
+								
+								$(".item").html(data);
+								
+								 jQuery('#faceoff').hide();
+							}
+						  });
+						  
+						  
+			  return false; 
+			}
+			
+			
+		 function  querystring(circle)
+			{
+			    var viewlongcode= window.localStorage.getItem("viewlongcode");
+					 
+					 jQuery('#faceoff').show();
+		   
+		          $.ajax({
+							type:'POST',
+							url:"http://manage.staticking.net/index.php/servicessms/viewlongcodedetailsapi",
+							data:'logged_in='+logged_in+'&viewlongcode='+viewlongcode+'&pageno=0'+'&circle='+circle,
+							
+							success:function(data)
+							{
+								
+								$(".item").html(data);
+								 jQuery('#faceoff').hide();
+							}
+						  });
+						  
+						  
+			  return false; 
+			}
+			
+			
+			
+			 function  operatorquery(operator)
+			{
+			    var viewlongcode= window.localStorage.getItem("viewlongcode");
+					 
+					 jQuery('#faceoff').show();
+		   
+		          $.ajax({
+							type:'POST',
+							url:"http://manage.staticking.net/index.php/servicessms/viewlongcodedetailsapi",
+							data:'logged_in='+logged_in+'&viewlongcode='+viewlongcode+'&pageno=0'+'&operator='+operator,
+							
+							success:function(data)
+							{
+								
+								$(".item").html(data);
+								 jQuery('#faceoff').hide();
+							}
+						  });
+						  
+						  
+			  return false; 
+			}	
+
+
+			
+			
+
+</script>
+
+</body>
+</html>

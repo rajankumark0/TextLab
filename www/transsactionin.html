@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+  
+   <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+	 
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+
+<script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+   
+ 
+		if(window.localStorage.getItem("loggedIn")==1) 
+		{ 
+		 //alert('ram2');
+		}
+		else{ 
+
+		window.location.href="login.html";
+
+
+
+		}
+		
+		
+		function setvalue()
+		{
+		
+			if(!logged_in) 
+			{ 
+			 logout();
+			}
+			
+		         setuserinfo(logged_in);
+				 
+			           getpagehtml();
+      	
+
+				  
+		}
+		
+		function getpagehtml()
+		{
+            $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/services/transsactioninapi",
+				data:'logged_in='+logged_in,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+				}
+		      });
+
+			  
+		}
+		
+		
+		function setquery()
+		{
+		
+		  var route=jQuery('#routeid').val();
+            $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/services/transsactioninapi",
+				data:'logged_in='+logged_in+'&route='+route,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+				}
+		      });
+
+			return false;    
+		}
+		
+		
+		function setquery1()
+		{
+		
+		  var user=jQuery('#username').val();
+            $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/services/transsactioninapi",
+				data:'logged_in='+logged_in+'&user='+user,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+				}
+		      });
+
+			return false;  
+		}
+		
+		
+</script>
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">Transaction In</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+<div id="loginContainer">
+
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose">
+<div class="col-sm-4 col-xs-6"><label>Short</label>
+<select name="list" class="form-control" onchange="this.form.submit();">
+<option value="">Sort</option>
+<option value="20">20</option>
+<option value="50">50</option>
+<option value="100">100</option>
+<option value="300">300</option>
+<option value="500">500</option>
+<option value="1000">1000</option>
+</select>
+
+</div>
+
+
+
+<div class="col-sm-4 col-xs-6"><label>Select Route</label>
+<form>
+<select name="route" id="routeid" class="form-control" onchange="setquery()">
+
+                                                <option value="">Select Route</option>
+
+                                                
+
+                                               
+
+                                                <option value="UHJvbW90aW9uYWw=">Promotional</option>
+												<option value="YXBpUHJvbW90aW9uYWw=">API Promotional</option>
+                                                <option value="UHJvbW90aW9uYWwx">Promotional 1</option>
+                                                
+
+                                                <option value="cHJvbW9zZW5kZXJpZA==">Promo S.ID</option>
+												<option value="YXBpcHJvbW9zZW5kZXJpZA==">API Promo S.ID</option>
+                                                
+
+                                                <option value="VHJhbnNhY3Rpb25hbA==">Transactional</option>
+												<option value="YXBpVHJhbnNhY3Rpb25hbA==">API Transactional</option>
+                                                
+                                                <option value="dm9pY2VzbXM=">Voice SMS</option>
+												
+                                                
+
+                                                 <option value="c29jaWFsbWVkaWE=">Social Media</option>
+                                                                                                  <option value="YW5kcm9pZGFwcA==">Android App</option>
+                                                 <option value="VHJhbnNhY3Rpb25hbDI=">Transactional 2</option>
+                                                 <option value="aW50ZXJuYXRpb25hbA==">International</option>
+                                                </select>
+												
+	</form>											
+
+</div>
+
+
+<div class="col-sm-4 col-xs-12"><label>Add Username & Hit Enter</label>
+<form  method="get" onsubmit="return setquery1();">
+   <input type="text" name="user" id="username" class="form-control input-box" placeholder="Add Username" required>
+</form>
+</div>
+
+
+
+
+<div class="col-md-12">
+<div style="overflow-x:auto;float: left;
+    width: 100%;">
+<div class="table-responsive">
+<table class="table table-bordered">
+       
+       <tr>
+       <th>Id</th>
+       <th>Username</th>
+       <th>Volume</th>
+       <th>Type</th>
+       <th>Route</th>
+       <th>Price</th>
+       <th>Tax</th>
+       <th>Amount</th>
+       <th>Credits</th>
+       <th>Note</th>
+       <th>Added By</th>
+       <th>Date</th>
+       </tr>
+       <tbody class="item">
+		
+	    </tbody>   
+              
+       
+       
+              
+       </table>
+       
+
+
+											
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-12">
+<!--<input type="submit" id="sendsmsfast" class="btn btn-primary inner-button" value="Send Message">-->
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div class="footer-credits" id="footercredits">
+
+
+</div>
+
+
+
+
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+
+
+<script src="js/left-menuhtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+<script src="js/on-click.js"></script>
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+</body>
+</html>

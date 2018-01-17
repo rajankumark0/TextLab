@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+  
+     <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+					 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+
+</head>
+
+<body style="background:#fff; color:#000;" onload="checkconnection()">
+
+<script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+  	function checkconnection()
+	{
+	
+	
+	      	var url = "http://manage.staticking.net/index.php/services/connectionapi";
+		   $.getJSON(url, function(data) {
+			
+			setvalue();
+			
+		})
+		.error(function() {
+				alert('No Internet Connection Please Try Again!');
+				checkconnection();
+				
+				
+			
+		});
+	
+	}
+		
+		function setvalue()
+		{
+		             
+					
+					 
+					  if(!logged_in) 
+						{ 
+						 logout();
+						 }
+						
+			              setuserinfo(logged_in);						
+	                  //addrightmenu(logged_in);		
+
+            		  $.ajax({
+						type:'POST',
+						
+						url:"http://manage.staticking.net/index.php/services/homedataapi",
+						data:'logged_in='+logged_in,
+						success:function(data)
+						{
+							
+							$("#dhashboarddata").html(data);
+						}
+					  });
+
+
+
+
+
+
+
+
+					  
+		}
+
+
+</script>
+
+<div class="container" style="overflow:hidden;">
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-5 col-xs-5 dasbord-font">Dashboard</div>
+
+<div class="col-sm-2 col-xs-2"></div>
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+
+	<div id="loginContainer">
+
+	</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="quick-link">
+<div class="row">
+
+<div class="col-sm-12">
+<h3>QUICK SELECTION</h3>    
+
+</div>
+
+<div class="col-sm-12">
+
+	<div id="quickselection" class="row" style="text-align:center; margin-top:10px;">
+
+	<div class="col-sm-2 col-xs-2"><a  onClick="slide('compose-sms.html')" > <img src="images/3.png" class="img-responsive quick-image"></a></div>
+
+<div class="col-sm-2 col-xs-2"><a  onClick="slide('quick-sent-item.html')" > <img src="images/4.png" class="img-responsive quick-image"></a></div>
+
+<div class="col-sm-2 col-xs-2"><a  onClick="slide('view-miss-call-alerts.html')" > <img src="images/5.png" class="img-responsive quick-image"></a></div>
+
+<div class="col-sm-2 col-xs-2"> <a  onClick="slide('view-short-long-code.html')" ><img src="images/6.png" class="img-responsive quick-image"></a></div>
+
+<div class="col-sm-2 col-xs-2"> <a  onClick="slide('quick-compose.html')" ><img src="images/1.png" class="img-responsive quick-image"></a></div>
+
+<div class="col-sm-2 col-xs-2"> <a  onClick="slide('quick-sent-item.html')" ><img src="images/2.png" class="img-responsive quick-image"></a></div>
+
+	</div>
+
+
+ </div>
+
+</div>
+
+</div>
+
+
+
+<div class="available-credits">
+
+<div class="row">
+<div class="col-sm-12"><h1>AVAILABLE CREDITS</h1></div>
+
+</div>
+
+<div id="dhashboarddata" class="row row-pad">
+
+</div>
+
+</div>
+
+
+<div style="margin:40px 0px; float:left;"></div>
+
+
+<div id="footercredits" class="footer-credits">
+
+
+
+
+</div>
+
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+
+
+<script src="js/left-menuhtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+
+
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>All sent sms</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+
+
+     <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+
+</head>
+
+<body style="background:#fff; color:#000;"  onload="setvalue()">
+
+<script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+
+		if(window.localStorage.getItem("loggedIn") == 1) 
+		{ 
+		// alert('ram1');
+		}
+		else{  window.location.href="login.html"; }
+		
+		
+		function setvalue()
+		{
+		             
+              setuserinfo(logged_in);		
+
+					  getpageoption();
+					  getpageitem(1);
+					
+					
+		}
+		
+		
+	function getpageoption()
+		{
+		  
+		   
+		    var datastring='logged_in='+logged_in;
+			
+									
+							jQuery.ajax({
+									
+									type:'GET',
+									contentType: 'application/json',
+									 dataType: 'jsonp',
+									
+									url:'http://manage.staticking.net/index.php/servicessms/allsentsmsoption',
+									data:datastring,
+	
+									success:function(data)
+									{
+												
+										  
+										   var items =data.msenderids;
+										   
+										   
+										    var routeshtml='<option value="">Sort By Sender ID</option>';
+										  for (var key in items) {
+										  
+										               routeshtml+='<option value="'+items[key]+'">'+key+'</option>';
+													   
+													
+												}
+												
+												
+										jQuery('#sortbysenderid').html(routeshtml);		
+											
+										
+																			 			  
+
+									}
+
+									
+
+								
+
+							});
+		   
+		   
+		 
+		}	
+
+	function getpageitem(pageno)
+		{
+            $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				data:'page='+pageno+'&logged_in='+logged_in,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+						setdata();
+				}
+		      });
+
+			  
+		}
+
+
+function querystring(senderids)
+{
+
+  var pageno=1;
+ 
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				data:'page='+pageno+'&logged_in='+logged_in+'&senderids='+senderids,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+						setdata();
+				}
+		      });
+}		
+function  userquerystring()
+{
+   var pageno=1;
+  
+  var usernameid=jQuery('#usernameid').val();
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				data:'page='+pageno+'&logged_in='+logged_in+'&usernameid='+usernameid,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+						setdata();
+				}
+		      });
+			  
+			  
+return false; 
+}
+
+function  smquerystring()
+{
+   var pageno=1;
+  
+  var smsid=jQuery('#smsid').val();
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				data:'page='+pageno+'&logged_in='+logged_in+'&smsid='+smsid,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+						setdata();
+				}
+		      });
+			  
+			  
+return false; 
+}
+
+function  datequerystring()
+{
+   var pageno=1;
+ 
+  var fromdate=jQuery('#fromdate').val();
+   var todate=jQuery('#todate').val();
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				data:'page='+pageno+'&logged_in='+logged_in+'&fromdate='+fromdate+'&todate='+todate,
+				success:function(data)
+				{
+					 
+					$(".item").html(data);
+						setdata();
+				}
+		      });
+			  
+			  
+return false; 
+}
+function bulkdlrs()
+{
+       
+  
+  var fromdate=jQuery('#fromdate1').val();
+   var todate=jQuery('#todate1').val();
+    var route=jQuery('#routeid').val();
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				data:'logged_in='+logged_in+'&fromdate='+fromdate+'&todate='+todate+'&route='+route,
+				success:function(data)
+				{
+					
+					$(".msg").html(data);
+				}
+		      });
+			  
+			  
+}
+
+function transactionaldlr(smsid)
+{
+       
+  //jQuery('#faceoff').show();
+ 
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/transactionaldlrapi",
+				data:'logged_in='+logged_in+'&smsid='+smsid,
+				success:function(data)
+				{
+					 //jQuery('#faceoff').hide();
+					$(".item").html(data);
+						setdata();
+				}
+		      });
+}
+function internationaldlr(smsid)
+{
+       
+  //jQuery('#faceoff').show();
+ 
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/internationaldlrapi",
+				data:'logged_in='+logged_in+'&smsid='+smsid,
+				success:function(data)
+				{
+					 //jQuery('#faceoff').hide();
+					$(".item").html(data);
+						setdata();
+				}
+		      });
+}
+
+function promotionaldlr(smsid)
+{
+       
+  //jQuery('#faceoff').show();
+ 
+     $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/promotionaldlrapi",
+				data:'logged_in='+logged_in+'&smsid='+smsid,
+				success:function(data)
+				{
+					 //jQuery('#faceoff').hide();
+					$(".item").html(data);
+					setdata();
+				}
+		      });
+}
+</script>
+
+
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">All Sent SMS</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+
+	<div id="loginContainer">
+		
+	</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose">
+<div class="col-sm-12 col-xs-12">
+ <a href="#" class="show_hide">+</a>
+ 
+
+ 
+    <div class="slidingDiv" style="margin-top:25px;">
+    
+    <div class="row">
+    <div class="col-sm-6 col-xs-6">
+
+
+       <select class="form-control" name="senderids" id="sortbysenderid" onchange="querystring(this.value)" required>
+
+
+           <option value=""> Short By Sender ID</option>
+						                
+												                                              
+
+
+         </select>
+
+</div>
+
+
+
+<div class="col-sm-6 col-xs-6">
+<form action="" onsubmit="smquerystring()" method="get">
+<input type="text" name="smsid" id="smsid" class="form-control input-box" placeholder="Add SMS ID & Hit Enter" required>
+</form>
+</div>
+<form action="" method="get">
+<div class="col-sm-6 col-xs-6">
+<input type="text" name="fromdate" id="fromdate" class="form-control input-box input-date-picker" placeholder="From Date" required>
+
+</div>
+
+<div class="col-sm-6 col-xs-6">
+<input type="text" name="todate" id="todate"  class="form-control input-box input-date-picker" placeholder="To Date" required>
+
+</div>
+
+<div class="col-md-12">
+<input type="button" id="sendsmsfast" onClick="datequerystring()" class="btn btn-primary inner-button" value="Date Search" style="margin-bottom:20px !important;">
+</div>
+</form>
+</div>
+
+  
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-12" style="margin-top:25px;">
+<div style="overflow-x:auto;float: left;
+    width: 100%;">
+    
+    
+   <div class="table-responsive">
+<table class="table table-bordered">
+       <thead>
+       <tr>
+       <th>Id</th>
+       <th>Username</th>
+       <th>Sender</th>
+              <th>Date &amp; Time</th>
+       <th width="80">Total Contacts</th>
+       <th width="80">Total SMS</th>
+       <th max-width="80">Credits</th>
+       <th width="500">Content</th>
+       <th>SMS Type</th>
+       <th>Route</th>
+              <th colspan="4">Report</th>
+       </tr>
+       </thead>
+	   
+        <tbody class="item">
+	 </tbody>
+       </table>
+       
+
+
+<!--<a class="btn btn-info">1</a><a href="#" class="btn btn-default" data-ci-pagination-page="50" rel="start">2</a><a href="#" class="btn btn-default" data-ci-pagination-page="50" rel="next">&gt;</a>-->												
+</div> 
+
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div id="footercredits" class="footer-credits">
+
+
+
+</div>
+
+
+
+
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+	
+    <!-- Modal content-->
+    <div class="modal-content" style="width:100%;">
+      <span id="msgload"></span>
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title popupme">Delivery Report </h4>
+      </div>
+      <div id="showthere" class=" modal-body alert-info">
+     
+      
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="messagemodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+	
+    <!-- Modal content-->
+    <div class="modal-content">
+      <span id="msgload"></span>
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title popupme">Message </h4>
+      </div>
+      <div id="showmsgthere" class=" modal-body alert-info" style="white-space:pre;">
+     
+      
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+        <button type="button" id="msgmodal" data-toggle='modal' data-target='#messagemodal' style="display:none;"></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+
+<script src="js/left-menuhtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+<script src="js/on-click.js"></script>
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+ <script src="js/bootstrap-datepicker.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script>
+  $('.input-date-picker').datepicker({
+            orientation: "bottom",
+            daysOfWeekDisabled: "6",
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true
+        });
+ </script>
+ 
+ <script type="text/javascript">
+$=jQuery;
+
+ function setdata()
+{
+			$(".viewreport").click(function()
+			{
+				check=(this.value);
+				
+				alert(check);
+				
+				if(check!=='')
+				{
+					$.ajax({
+							type:'POST',
+							url:'http://manage.staticking.net/index.php/servicessms/viewdlrapi',
+							data:'checkid='+check+'&logged_in='+logged_in,
+							beforeSend:function()
+							{
+								$("#showthere").text("Please Wait...");
+							},
+							success:function(data)
+							{
+								$("#showthere").html(data);
+							}
+					});
+				}
+			});
+			
+			
+			$(".originalmsg").on('click',function()
+{
+	msg=$(this).attr("originalmsg");
+	
+	$("#showmsgthere").html("<pre>"+msg+"</pre>");
+	$("#msgmodal").click();
+});
+}
+
+</script>
+ 
+</body>
+</html>

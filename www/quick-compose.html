@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+        
+		<script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+		
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+
+<div class="container" style="overflow:hidden;">
+         
+		 <script>
+	
+ var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+		if(window.localStorage.getItem("loggedIn") == 1) 
+		{ 
+		// alert('ram1');
+		}
+		else{  window.location.href="login.html"; }
+		
+		
+		function setvalue()
+		{
+		       			 		            
+			            setuserinfo(logged_in);
+						
+						
+			             datastring='logged_in='+logged_in;
+			
+											
+							jQuery.ajax({
+									
+									type:'GET',
+									contentType: 'application/json',
+									 dataType: 'jsonp',
+									
+									url:'http://manage.staticking.net/index.php/servicessms/composesmsapi',
+									data:datastring,
+									
+
+									beforeSend:function()
+									{
+
+										//jQuery("#msgstatus").addClass("alert-danger").fadeIn(10).text("Please Wait....");
+
+									},
+
+									success:function(data)
+									{
+										//  alert(JSON.stringify(data.routes));
+										  
+										  var routes =data.routes;
+										  var routeshtml='<option value=""><b>Select Route</b></option>';
+										  for (var key in routes) {
+										  
+										               routeshtml+='<option value="'+key+'">'+key+'</option>';
+													   
+													
+												}
+												
+												var routehtml=window.localStorage.getItem("routehtml");
+												
+												var senderhtml=window.localStorage.getItem("senderhtml");
+												
+												
+												
+											if(routehtml!=null)
+                                             {
+											 
+											   jQuery('#routeid').html(routehtml);
+											    jQuery('#senderid').html(senderhtml);
+												
+												jQuery('#routeid').val(window.localStorage.getItem("routeval"));
+												
+												jQuery('#senderid').val(window.localStorage.getItem("senderval"));
+												
+																						
+											 
+											 }else{
+											   jQuery('#routeid').html(routeshtml);
+											 }											
+																			
+												
+										  
+										   var group =data.group;
+										  var grouphtml='<option value=""><b>Select Group</b></option>';
+										  for (var key in group) {
+										  									  						              
+										 grouphtml+=' <option value="'+group[key]['grpfile']+'">'+group[key]['grpname']+'</option>';
+													
+												}
+												
+										
+										jQuery('#groupswithname').html(grouphtml);		
+												 
+										 			  
+
+									}
+
+									
+
+								
+
+							});
+
+					
+			
+
+			document.querySelector("#pickContact").addEventListener("touchend", doContactPicker, false);	
+		
+		}
+		
+      function doContactPicker() {
+		
+	navigator.contacts.pickContact(function(contact){
+		console.log('The following contact has been selected:' + JSON.stringify(contact));
+		//Build a simple string to display the Contact - would be better in Handlebars
+		var entry = 0;
+		
+
+		 var txt =jQuery('#contactnumberst').val();
+		 
+		if(contact.phoneNumbers && contact.phoneNumbers.length) {
+			entry=contact.phoneNumbers[0].value;
+			
+			entry=entry.replace(/\s/g, "") ;
+			
+			entry=entry.replace(/[^0-9 ]/g, "");
+			
+			 entry=entry.substr(entry.length - 10);
+			 
+						   if(txt!='')
+								{
+								  var textval=txt+'\n'+entry;
+								}else
+								{
+								  var textval=entry;
+								}
+						   
+						   
+		}
+
+			
+		 jQuery('#contactnumberst').val(textval);	
+			
+	},function(err){
+		console.log('Error: ' + err);
+	});
+}
+
+
+</script>
+       
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">Quick Compose</div>
+
+
+
+	<div class="col-sm-3 col-xs-3" style="text-align:center;">
+		<div id="loginContainer">
+			
+		</div>
+
+	</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose">
+<div class="col-sm-12 col-xs-12">
+ <a href="#" class="show_hide">+</a>
+ 
+
+ 
+    <div class="slidingDiv" style="margin-top:24px !important;">
+    
+    <div class="row">
+    <div class="col-sm-6 col-xs-6"><label> Route</label>
+		<select class="form-control" id="routeid" onchange="checkroutes(this.value);" required>
+
+		<option value="">Route</option>
+
+
+		</select>
+
+</div>
+
+
+
+<div class="col-sm-6 col-xs-6" id="senderidrowhi"><label id="labelsendid">Sender ID</label>
+	<select class="form-control" name="senderid" id="senderid"  required=""> 
+
+		 <option value="">Sender ID</option>
+
+
+	</select>
+
+</div>
+
+
+<div class="col-sm-12 col-xs-12"><label>Language</label>
+<select class="form-control" id="language" name="language" required=""> 
+
+<option value="english">English</option>
+
+
+<option value="Others">Others</option>
+
+
+
+
+
+
+
+</select>
+
+</div>
+
+</div>
+
+  
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="col-sm-12" style="float:left;">
+<label>Contact No (One Per Line)</label>
+    <div class="input-group">
+      <textarea class="form-control composse-box" pattern="[0-9]*" inputmode="numeric" id="contactnumberst" rows="3" placeholder="" style="margin:5px 0px;" onchange="countwordcontact();" onmouseover="countwordcontact();" onkeyup="countwordcontact();" onkeydown="countwordcontact();" required ></textarea>
+      <div class="input-group-btn">
+        <button class="btn btn-default mobile-icon" id="pickContact" type="button"><i class="fa fa-mobile"></i></button>
+      </div>
+    </div>
+    <label class="red"  id="totalcontacts">Total Contact No's:)</label><input type="hidden" id="totalcontactrow"  />
+
+</div>
+
+
+
+
+
+
+
+<div class="col-sm-12 col-xs-12" id="smstabh">
+<label>Sms Content</label>
+<input type="hidden" value="textmsg" id="msgtype" name="msgtype" >
+	                                           
+<textarea class="form-control composse-box" rows="3" id="smscontent" placeholder="" style="margin:5px 0px;" onchange="countwords();" onkeydown="countwords(); " onclick="countwords();" onkeyup="countwords();" onfocus="countwords();" onkeypress="countwords();" onmouseover="countwords();" onmousemove="countwords();" required></textarea>
+<label class="red"><span id="wordsremain"></span> <span id="labelchar"> &nbsp;Characters&nbsp; </span> <span id="countsms"></span> <span id="labelsms"> &nbsp;SMS&nbsp; </span></label>
+
+   <input type="hidden" id="countsmshidden" />
+</div>
+
+
+
+<div class="col-sm-12 col-md-12">
+<input type="submit" id="sendsmsfast"  class="btn btn-primary inner-button" value="Send Message">
+<span id="msgstatus"></span>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<input type="hidden" id="istendigitid" />           
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div id='footercredits' class="footer-credits">
+
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+
+<script src="js/left-menuhtml.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+<script src="js/on-click.js"></script>
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+
+ <script src="js/moment.js"></script>
+ 
+<script type="text/javascript" src="js/composesms.js"></script>
+
+       
+<script type="text/javascript">
+$=jQuery;
+$(document).ready(function()
+{
+	$("#routeid").on('change',function()
+	{
+		routch=$("#routeid").val();
+		
+			$("#labelsms, #wordsremain, #labelchar, #countsms, #smscontent").hide();
+			$.ajax({
+					type:'POST',
+					url:'http://manage.staticking.net/index.php/servicessms/gettemplatesapi',
+					data:'templates='+routch+'&logged_in='+logged_in,
+					beforeSend:function()
+					{
+						$("#smstabh").html("Please Wait. Fetching Data");
+						$("#sendsmsfast").attr('disabled','disabled');
+					},
+					success:function(data)
+					{
+						$("#smstabh").html(data);
+						$("#sendsmsfast").removeAttr('disabled');
+					}
+					
+			});
+
+	});
+	
+	
+});
+</script>
+<script type="text/javascript">
+function getsmslen(str)
+{
+	$=jQuery;
+	totchars=str.length;
+	$("#wordsremain").html(totchars);
+	msgtyu=$("#msgtype").val();
+	if(msgtyu=='unicodemsg' || msgtyu=='unicodeflashmsg')
+	{
+		if(totchars > 71)
+		{
+		totsmslen=Math.ceil(totchars/63);
+		}
+		else
+		{
+		totsmslen=Math.ceil(totchars/70);	
+		}
+	
+	}
+	else
+	{
+		if(totchars > 161)
+		{
+		totsmslen=Math.ceil(totchars/153);	
+		}
+		else
+		{
+		totsmslen=Math.ceil(totchars/160);	
+		}
+	}
+	$("#countsms").html(totsmslen);
+	$("#countsmshidden").val(totsmslen);
+	$("#msgpreview").html("<span class='alert-info' style='font-size:15px;'><br>Message Preview:</span>"+str+"<br>");
+}
+
+</script>
+
+
+
+
+<script type="text/javascript">
+function checkroutes(str)
+{
+	$=jQuery;
+	if(str=='Promotional' || str=='Promotional1')
+	{
+		$("#senderid").hide();
+		$("#labelsendid").hide();
+		$("#opensenderid").hide();
+		$("#senderidrowhi").hide();
+	}
+	else
+	{
+		$("#senderid").show();
+		$("#labelsendid").show();
+		$("#opensenderid").show();
+		$("#senderidrowhi").show();
+	}
+	
+}
+</script>
+
+<script type="text/javascript">
+
+$=jQuery;
+
+$(document).ready(function()
+
+{
+
+	$("#sendsmsfast").click(function()
+
+	{
+         
+		countwords();
+  
+		countwordcontact();
+          
+		
+
+		var routeid=$("#routeid").val();
+
+		var senderid=$("#senderid").val();
+
+		var contactnumberst=$("#contactnumberst").val();
+
+		var msgtype=$("#msgtype").val();
+
+		var smscontent=encodeURIComponent($("#smscontent").val());
+
+		var schedulenew=$("#schedulenew").val();
+
+		var totalsms=$("#countsmshidden").val();
+
+		var totalcontacts=$("#totalcontactrow").val();
+		
+		
+		if(senderid=='' && routeid=='Promotional' || senderid=='undefined' && routeid=='Promotional')
+		{
+			senderid='Default';
+		}
+		
+		if(senderid=='Default' && routeid=='Transactional' || senderid=='' && routeid=='Transactional')
+		{
+			$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Select Sender ID");
+			return false;
+		}
+		
+		if(senderid=='Default' && routeid=='Promosid' || senderid=='' && routeid=='Promosid')
+		{
+			$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Select Sender ID");
+			return false;
+		}
+		if(senderid=='Default' && routeid=='transactional2' || senderid=='' && routeid=='transactional2')
+		{
+			$("#bbalertd").fadeIn(10).addClass("alert-danger").text("Please Select Sender ID");
+			return false;
+		}
+		
+
+		if(routeid=='' || senderid=='' || contactnumberst=='' || msgtype=='' || smscontent=='' || totalsms=='' || totalcontacts=='')
+
+		{
+
+			$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Enter Required Values");
+
+			
+
+		}
+
+		else
+		{
+			if(totalcontacts > 50000)
+			{
+				alert("Enter Only 50000 Numbers");
+				return false;
+			}
+			else
+			{
+			if(routeid=='Promotional1' && $("#istendigitid").val()=='yes' && totalsms > 1)
+			{
+				alert("You Can Send Only 1 Sms(160 Characters) On this Route ");
+				return false;
+			}
+			else
+			{		
+datastring='routeid='+routeid+'&senderid='+senderid+'&contactnumberst='+contactnumberst+'&msgtype='+msgtype+'&smscontent='+smscontent+'&schedulenew='+schedulenew+'&totalsms='+totalsms+'&totalcontacts='+totalcontacts+'&logged_in='+logged_in;
+
+			 
+
+			    window.localStorage.setItem("routehtml", jQuery('#routeid').html());
+			    window.localStorage.setItem("senderhtml", jQuery('#senderid').html());
+				
+				  window.localStorage.setItem("routeval",routeid);
+			    window.localStorage.setItem("senderval", senderid);
+			
+			
+			
+			$.ajax({
+
+					type:'POST',
+
+					url:'http://manage.staticking.net/index.php/servicessms/sendsmsapi',
+
+					data:datastring,
+
+					beforeSend:function()
+					{
+						$("#waitmsg").text("Please Wait. Sending Message.....");
+						
+						$("#faceoff").show();
+						$("#msgstatus").fadeIn(10).removeClass("alert-danger").addClass("alert-info").text("Please Wait, Sending Message.....");
+						$("#sendsmsfast").attr('disabled','disabled');
+						
+						
+					},
+
+					success:function(data)
+					{
+						$("#faceoff").hide();
+						$("#showloadf").click();
+						$("#waitmsg").fadeIn(10).html(data);
+						
+						$("#msgstatus").fadeIn(10).removeClass("alert-info").html(data);
+						$("#sendsmsfast").removeAttr('disabled');
+						$(".close").removeAttr('disabled');
+						
+						$("#clsosebutton").show();
+						$("input,select,textarea").each(function()
+						{
+							//$(this).val("");
+						});
+						$("#sendsmsfast").val("Send Message");
+						
+					}
+
+			});
+
+			}
+
+			
+			}
+		}
+
+		
+
+	});
+
+$("#clsosebutton").click(function()
+{
+	location.reload(true);
+});	
+						
+
+
+});
+
+
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#routeid").on('change',function()
+	{
+		routbval=$(this).val();
+		
+		if(routbval=='Promosid' || routbval=='Transactional' || routbval=='transactional2')
+		{
+			
+					
+				$.ajax({
+					type:'POST',
+					url:'http://manage.staticking.net/index.php/servicessms/getsenderidbyrouteapi',
+					data:'routbval='+routbval+'&logged_in='+logged_in,
+					
+					success:function(data)
+					{
+					
+					
+						
+						$("#senderid").html(data);
+						
+						
+						
+					}
+					
+			});
+			
+		}
+		else
+		{
+			$("#senderid").html("");	
+		}
+		if(routbval=='transactional2' || routbval=='Transactional')
+		{
+			$("#opentrans2").click();
+		}
+		
+        if(routbval=='Transactional')
+        {
+            $("#templateswithname").hide();
+            $(".selecttmp").hide();
+        }
+        else
+        {
+            $("#templateswithname").show();
+             $(".selecttmp").show();
+        }
+	
+			
+	});
+});
+</script>
+<script type="text/javascript">
+$=jQuery;
+$("#contactnumberst").on('change keyup',function()
+{
+    //$("#contactnumberst").val(this.value.match(/[0-9 \s]*/));
+     onlynumberscheck();
+});
+
+
+
+    function onlynumberscheck()
+	{
+		onlynumsty=/^[0-9 \s]+$/;
+		nosval=$("#contactnumberst").val();
+		//var patterns = /[^0-9]/g;
+		if(nosval.match(onlynumsty))
+		{
+		}
+		else
+		{
+			if(nosval!=='')
+			{
+			alert("Please Remove Alphabets and Special Characters From Your Contact List.");
+			 $("#contactnumberst").val("");
+			}
+		}
+	}
+</script>
+
+
+
+<script type="text/javascript">
+$=jQuery;
+$("#addnewsenderid").on('keyup change keydown keypress',function()
+{
+	onlyaplha=/^[A-Z a-z]+$/;
+	sendervalnew=$("#addnewsenderid").val();
+	if(sendervalnew.match(onlyaplha))
+		{
+		}
+		else
+		{
+			if(sendervalnew!=='')
+			{
+			alert("Enter Only Alphabets");
+			$("#addnewsenderid").val("");
+			}
+		}
+	
+});
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#routeid").on('change',function()
+	{
+		roytu=$(this).val();
+		
+		if(roytu=='Promotional1')
+		{
+			$.ajax({
+					type:'POST',
+					url:'http://manage.staticking.net/index.php/servicessms/getsmscsofroute/'+roytu,
+					data:'route='+roytu+'&logged_in='+logged_in,
+					beforeSend:function()
+					{
+						
+					},
+					success:function(data)
+					{
+						
+						if(data=='10digitid')
+						{
+						  $("#istendigitid").val("yes");	
+						
+						
+						}
+					}
+					
+				});
+		}
+		else
+		{
+			
+			$("#istendigitid").val("no");	
+		
+		}
+	});
+	
+	
+	
+	
+});
+
+
+</script>
+
+
+</body>
+</html>

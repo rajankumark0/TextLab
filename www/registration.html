@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+
+   
+ <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+</head>
+
+<body style="background:#df531c;" onload="onLoad()">
+<script>
+ var optnumber=0;
+        function onLoad() {
+            if(( /(ipad|iphone|ipod|android)/i.test(navigator.userAgent) )) {
+               initApps();
+            } else {
+                updateStatus('need run on mobile device for full functionalities.');
+            }
+        }
+
+        // we will restore the intercepted SMS here, for later restore
+        var smsList = [];
+        var interceptEnabled = false;
+
+        function initApps() {
+        	if (! SMS ) { alert( 'SMS plugin not ready' ); return; }
+        	
+            document.addEventListener('onSMSArrive', function(e){
+            	var data = e.data;
+            	
+			
+				var smscontent=data.body;
+				
+							
+				var n = smscontent.search(optnumber);
+				
+				if(n >=0)
+				{
+				   $("#otpcode").val(optnumber);
+				}
+				
+				jQuery('#faceoff').hide();
+            	
+            });
+        }
+        
+             
+       
+        function startWatch() {
+        	if(SMS) SMS.startWatch(function(){
+        		//update('watching', 'watching started');
+        	}, function(){
+        		//updateStatus('failed to start watching');
+        	});
+        }
+        function stopWatch() {
+        	if(SMS) SMS.stopWatch(function(){
+        		//update('watching', 'watching stopped');
+        	}, function(){
+        		//updateStatus('failed to stop watching');
+        	});
+        }
+        
+       
+
+        </script>
+       
+<div class="body-background">
+<div class="container">
+<div class="col-md-6"></div>
+
+<div class="col-md-6">
+<div class="login-formme">
+
+<div class="row">
+
+<div class="col-md-12 login-page-ma login-text">REGISTRATION</div>
+
+<form id="registerform">
+
+
+<div class="col-md-12 login-page-ma">
+
+<div class="input-group">
+<span class="input-group-addon"><i class="fa fa-user pass-text"></i></span>
+<input type="text" class="form-control login-height" name="username" id="username" placeholder="Enter Username" required>
+</div>
+
+
+
+
+
+
+</div>
+
+<div class="col-md-12 login-page-ma">
+
+
+<div class="input-group">
+<span class="input-group-addon"><i class="fa fa-envelope-o email-testme"></i></span>
+<input type="email" name="email" id="email" class="form-control login-height" placeholder="Enter Email" required>
+</div>
+
+
+
+</div>
+
+
+<div class="col-md-12 login-page-ma">
+<div class="input-group">
+<span class="input-group-addon"><i class="fa fa-lock pass-text"></i></span>
+<input type="password" id="password" name="password" class="form-control login-height" placeholder="Password">
+</div>
+</div>
+
+
+
+<div class="col-md-12 login-page-ma">
+<div class="input-group">
+<span class="input-group-addon"><i class="fa fa-map-marker  pass-text"></i></span>
+<input type="number" min="0" class="form-control login-height" id="pincode" name="pincode" placeholder="Pin Code" required>
+</div>
+</div>
+
+
+<div class="col-md-12 login-page-ma">
+
+
+<div class="input-group">
+<span class="input-group-addon"><i class="fa fa-mobile pass-text"></i></span>
+<input type="text" class="form-control login-height" id="phoneno" name="phoneno" maxlength="10" placeholder="Mobile No." required>
+<input type="button" id="verifymobno" class="btn btn-primary" style="width:87px;display:none;" value="Verify No">
+<input type="text" id="otpcode" placeholder="Enter OTP Code" class="form-control" style="display:none;">
+<input type="button" id="verifymymobno" class="btn btn-primary" style="width:87px;display:none;" value="Verify">
+<input type="button" id="resendverifymobno" class="btn btn-primary" style="width:87px;display:none;" value="Resend">
+</div>
+
+
+
+</div>
+<div class="col-md-12">
+<div class="g-recaptcha" data-sitekey="6Ld_9BETAAAAANB_7xe6Z2DZz3pqWsfET6pWQ72c"></div>
+</div>
+<div class="col-md-12 socil-link"><button class="btn btn-primarya btn-block btn-signin" id="yuoji" name="submit" type="submit">Register</button></div>
+
+<span id="msgstatus" style="font-size:15px;"></span>
+<input type="text" id="isverified" style="display:none">
+</form>
+
+<div class="col-md-12 forgot-pas">
+<div class="divi-new"><span>OR</span></div>
+
+</div>
+
+
+
+
+<div class="col-md-12 socil-link" style="margin-top:10px; margin-bottom:10px;">
+<div class="row">
+<div class="col-md-6 col-xs-6"><a onClick="facebook.onFacebookLogin();" class="facebook-login"><i class="fa fa-facebook"></i> Sign in with Facebook</a></div>
+<div class="col-md-6 col-xs-6"><a id="logingogle" class="googel-login"><i class="fa fa-google-plus"></i> Sign in with Google</a></div>
+</div>
+
+</div>
+
+
+<div class="col-md-12 login-page-ma" style="text-align:center;"><a onClick="slide('login.html')" class="forgot-pass-link"><i class="fa fa-backward"></i> Back To Login Page</a></div>
+
+
+
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+	<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+	<link rel="stylesheet" href="css/login.css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+
+	<script src="js/login.js"></script>
+	<script src="js/bs_leftnavi.js"></script>
+	<script src="js/fontawesome.js"></script> 
+	<script src="js/left-menu.js"></script>
+	<script src="js/left-menu2.js"></script>
+
+       <script type="text/javascript" src="js/oauth.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+
+ <script type="text/javascript" src="js/facebook.js"></script>
+ 
+ <script type="text/javascript" src="js/googleplus.js"></script>
+ 
+ <script type="text/javascript">
+
+
+$=jQuery;
+$(function() {
+  var txt = $("#username");
+  var alphanumbers=/^[a-z0-9]+$/;
+  var func = function()
+  {
+  
+    txt.val(txt.val().replace(/\s/g, ''));
+
+	  if(!txt.val().match(alphanumbers))
+	  {
+		 txt.val("");
+		 $("#msgstatus").text("Username must be alphanumeric with small latter");
+	  }
+	  else
+	  {
+		 $("#msgstatus").text(""); 
+		 
+		 
+	  }
+	  
+	  
+  }
+  
+  txt.keyup(func).blur(func);
+});
+
+
+
+
+
+mobnofunc=function()
+{
+	strs=$("#phoneno").val();
+	numbers=/^[0-9]+$/;
+	if(!strs.match(numbers))
+	{
+		alert("Only Numbers");
+		$("#phoneno").val("");
+	}
+	
+	
+}
+$("#phoneno").keyup(mobnofunc).change(mobnofunc);
+</script>
+
+<script type="text/javascript">
+$=jQuery;
+$(document).ready(function()
+{
+	$("#registerform").on('submit',function(ev)
+	{
+		ev.preventDefault();
+		
+		 
+		gresp=$("#g-recaptcha-response").val();
+				
+		if(gresp=='')
+		{
+			$("#msgstatus").fadeIn(0).addClass('alert-danger').text("Please Verify Captcha");
+		}
+		else
+		{
+			if($("#isverified").val()=='' && $("#isverified").val()!=='yes')
+			{
+				alert("Please Verify Your Mobile No");
+				$("#phoneno").focus();
+				return false;
+			}
+			else
+			{
+				if($("#username").val().length < 5)
+				{
+					$("#msgstatus").text("Username Must be Of 5 Characters or more than 5 Characters");
+				}
+				else
+				{
+					$.ajax({
+							type:'POST',
+							 contentType: 'application/json',
+				             dataType: 'jsonp',
+							url:'http://manage.staticking.net/index.php/services/registeruserapi',
+							data:$("#registerform").serialize(),
+							beforeSend:function()
+							{
+								$("#msgstatus").fadeIn(0).text("Please Wait..");
+								$("#register").attr('disabled','disabled');
+								
+							},
+							success:function(data)
+							{
+							
+							  // alert(JSON.stringify(data));
+							   
+								$("#msgstatus").removeClass('alert-danger').addClass('alert-success').fadeIn(0).html(data.msg);
+								$("#register").removeAttr('disabled');
+								if(data.status=='true')
+								{
+									$("#registerform").trigger('reset');
+								}
+							}
+							
+					});
+				}
+			}
+		}
+		
+	});
+	
+});
+
+</script>
+<script type="text/javascript">
+$("#phoneno").on('change keyup',function()
+{
+	if($.isNumeric($(this).val()) && $(this).val()!=='' && $(this).val().length=='10')
+	{
+		$("#verifymobno").show();
+	}
+	else
+	{
+		$("#verifymobno").hide();
+	}
+});
+
+$("#verifymobno,#resendverifymobno").on('click',function()
+{
+	if($("#phoneno").val()=='')
+	{
+		alert("Enter Mobile No");
+		$("#phoneno").focus();
+		return false;
+	}
+	else
+	{
+	
+	startWatch();
+		$.ajax({
+				type:'POST',
+				 contentType: 'application/json',
+				 dataType: 'jsonp',
+				url:"http://manage.staticking.net/index.php/services/sendotpverifymobileapi",
+				data:'mobileno='+$("#phoneno").val(),
+				beforeSend: function()
+				{
+					$("#verifymobno").val("Please Wait..");
+					$("#verifymobno").attr('disabled','disabled');
+				},
+				success:function(data)
+				{
+				
+				 //alert(JSON.stringify(data));
+				
+					if(data.status=='true')
+					{
+					//alert("OTP Sent");
+					
+					jQuery('#faceoff').show();
+					$("#verifymobno").hide();
+					$("#resendverifymobno").show();
+					$("#otpcode").show();
+					$("#verifymymobno").show();
+					$("#phoneno").attr('disabled','disabled');
+					
+					optnumber=data.otp;
+					}
+					else
+					{
+						//alert(data);
+						$("#verifymobno").removeAttr('disabled');
+						$("#verifymobno").val("Verify Mob No");
+					}
+				}
+		});
+	}
+});
+
+$("#verifymymobno").on('click',function()
+{
+ 
+	if($("#otpcode").val()=='')
+	{
+		alert("Please Enter OTP Code");
+		$("#otpcode").focus();
+		return false;
+	}
+	else
+	{
+		if($("#phoneno").val()=='')
+		{
+			alert("Please Enter Mobile No");
+			$("#phoneno").focus();
+			return false;
+		}
+		else
+		{
+		
+		              if(optnumber==$("#otpcode").val())
+						{
+							alert("Your Mobile Number Successfully Verified");
+							$("#isverified").val("yes");
+							$("#verifymobno").hide();
+							$("#resendverifymobno").hide();
+							$("#otpcode").hide();
+							$("#verifymymobno").hide();
+							$("#phoneno").removeAttr('disabled','disabled');
+							$("#verifymobno").removeAttr('disabled','disabled');
+							$("#verifymobno").val("Verify");
+						}
+						else
+						{
+							alert("Your Mobile Number Not Verified");
+							$("#verifymymobno").val("Verify");
+							$("#verifymymobno").removeAttr('disabled');
+							
+						}
+		   
+		}
+	}
+});
+</script>
+
+    
+
+
+
+
+</body>
+</html>

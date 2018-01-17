@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+
+<script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+   
+ 
+		if(window.localStorage.getItem("loggedIn")==1) 
+		{ 
+		 //alert('ram2');
+		}
+		else{ 
+
+		window.location.href="login.html";
+
+
+
+		}
+		
+		
+		function setvalue()
+		{
+		
+			if(!logged_in) 
+			{ 
+			 logout();
+			}
+			
+		         setuserinfo(logged_in);
+							
+	                    getpageitem();
+      		  
+
+				  
+		}
+		
+		
+    function getpageitem()
+		{
+            $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/viewsmstemplateapi",
+				data:'logged_in='+logged_in,
+				success:function(data)
+				{
+					
+					$(".item").html(data);
+				}
+		      });
+
+			  
+		}
+		
+		
+		 function approvetemplate(tempid)
+		 {
+		 
+		    $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/approvetemplateapi",
+				data:'logged_in='+logged_in+'&tempid='+tempid,
+				success:function(data)
+				{
+					
+					alert(data);
+				}
+		      });
+		
+		 }
+		 
+		  function deletesmstemplate(tempid)
+		 {
+		 
+		 
+		            $.ajax({
+				type:'POST',
+				url:"http://manage.staticking.net/index.php/servicessms/deletesmstemplateapi",
+				data:'logged_in='+logged_in+'&tempid='+tempid,
+				success:function(data)
+				{
+					
+					alert(data);
+				}
+		      });
+		
+		 }
+
+</script>
+
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">View Template</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+<div id="loginContainer">
+
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose">
+
+
+
+
+
+<div class="col-md-12">
+<div style="overflow-x:auto;float: left;
+    width: 100%;">
+<div class="table-responsive">
+<table class="table table-bordered item">
+
+<tbody><tr>
+<th>ID</th>
+<th>Username</th>
+<th>Title</th>
+<th>Template</th>
+<th>Type</th>
+<th>Status</th>
+<th>Date/Time</th>
+
+<th>Action</th>
+
+</tr>
+
+<tr class="1083">
+<td>1</td>
+<td>Demo</td>
+<td>abcs</td>
+<td>hfh</td>
+<td>Text</td>
+
+<td><span class="bg-success" style="font-size:16px; padding:0px !important;">Approved</span> </td>
+
+<td>2017-04-20 13:18:45</td>
+<td>
+<a href="#"class="btn btn-warning">Delete</a>
+</td>
+</tr>
+
+</tbody></table>
+       
+
+
+											
+</div>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+	<div class="footer-credits" id="footercredits">
+           
+
+	</div>
+
+
+
+
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+
+
+	<script src="js/left-menuhtml.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+	<link rel="stylesheet" href="css/login.css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+
+	<script src="js/login.js"></script>
+	<script src="js/bs_leftnavi.js"></script>
+	<script src="js/fontawesome.js"></script> 
+	<script src="js/left-menu.js"></script>
+	<script src="js/left-menu2.js"></script>
+
+<script type="text/javascript">
+$=jQuery;
+
+$(document).ready(function()
+{
+	
+
+$(".disapprove").on('click',function()
+{
+	content=$(this).val();
+	tempids=$(this).attr('tempid');
+	$("#templateidy").val(tempids);
+	//alert($("."+content).html());
+	$("#templatenamey").val(content);
+});
+
+
+$("#dispform").on('submit',function(ev)
+{
+	ev.preventDefault();
+	
+	$.ajax({
+			type:'POST',
+			url:'http://manage.staticking.net/index.php/servicessms/disapprovetemplateapi/'+$("#templateidy").val(),
+			data:$("#dispform").serialize(),
+			beforeSend:function()
+			{
+				$("#tempstatus").text("Please Wait.");
+				
+			},
+			success:function(data)
+			{
+				$("#tempstatus").addClass('alert-success').text(data);
+			}
+	});
+	
+});
+
+
+});
+</script>
+
+</body>
+</html>

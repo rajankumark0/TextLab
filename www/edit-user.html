@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+  
+   
+   <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+  
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+ <script>
+	var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+   
+ 
+		if(window.localStorage.getItem("loggedIn")==1) 
+		{ 
+		 //alert('ram2');
+		}
+		else{ 
+
+		window.location.href="login.html";
+
+
+
+		}
+		
+		
+		function setvalue()
+		{
+		
+					if(!logged_in) 
+					{ 
+					 logout();
+					}
+			
+		            setuserinfo(logged_in);
+						
+	                             
+      		
+              getpageitem();
+			  
+				  
+		}
+		
+		
+   
+		
+	 function getpageitem()
+			{
+			 
+			 var userid=window.localStorage.getItem("userid");
+				$.ajax({
+					type:'POST',
+					url:"http://manage.staticking.net/index.php/servicessms/edituserapi",
+					data:'logged_in='+logged_in+'&userid='+userid,
+					success:function(data)
+					{
+						
+						$(".item").html(data);
+						
+						
+					}
+				  });
+
+				  
+			}
+
+        
+	
+
+</script>
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">Edit User</div>
+
+
+
+<div class="col-sm-3 col-xs-3" style="text-align:center;">
+
+<div id="loginContainer">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose item">
+
+
+
+
+<div class="col-sm-6 col-xs-6">
+<label>Username</label>
+<input type="text" name="text" class="form-control input-box" placeholder="Username">
+
+</div>
+
+<div class="col-sm-6 col-xs-6">
+<label>Email ID</label>
+<input type="email" name="text" class="form-control input-box" placeholder="Email ID">
+
+</div>
+
+
+
+<div class="col-sm-6 col-xs-6">
+<label>Password</label>
+<input type="Password" name="text" class="form-control input-box" placeholder="Password">
+
+</div>
+
+<div class="col-sm-6 col-xs-6">
+<label>Place</label>
+<input type="text" name="text" class="form-control input-box" placeholder="Delhi">
+
+</div>
+
+<div class="col-sm-6 col-xs-6">
+<label>Pin Code</label>
+<input type="text" name="text" class="form-control input-box" placeholder="0">
+
+</div>
+
+<div class="col-sm-6 col-xs-6">
+<label>Phone No</label>
+<input type="text" name="text" class="form-control input-box" placeholder="9910763636">
+
+</div>
+
+<div class="col-sm-6 col-xs-12">
+<label>Status</label>
+<select class="form-control" id="status">
+
+<option value="">Select Status</option>
+
+<option value="active" selected="selected">Active</option>
+
+<option value="deactive">Deactive</option>
+
+</select>
+
+</div>
+
+<div class="col-sm-12 col-xs-12">
+<label>API Enable</label>
+Promotional: <input type="checkbox" id="perpromo" value="true" checked="checked">  
+Promo Sender Id: <input type="checkbox" id="perpromo" value="true" checked="checked">
+
+Transactional: <input type="checkbox" id="perpromo" value="true" checked="checked">
+
+Voice Sms: <input type="checkbox" id="perpromo" value="true" checked="checked">
+
+</div>
+
+<div class="col-sm-6 col-xs-12">
+<label>Social Package</label>
+<select class="form-control" id="socialpack">
+
+<option value="">Select Package</option>
+
+
+</select>
+
+</div>
+
+<div class="col-sm-12 col-xs-12">
+<label><input type="checkbox" id="permaskingno" value="true"> Masking Numbers  </label>
+
+
+</div>
+
+<div class="col-md-12">
+<input type="submit" id="sendsmsfast" class="btn btn-primary inner-button" value="Edit User" style="margin-top:20px;">
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div class="footer-credits" id="footercredits">
+
+
+</div>
+
+
+
+
+</div>
+
+<script src="js/jquery-1.11.2.min.js"></script>
+
+
+<script src="js/left-menuhtml.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+
+<script type="text/javascript">
+$(function() {
+  var txt = $("#username");
+  var alphanumbers=/^[0-9 a-z]+$/;
+  var func = function()
+  {
+    txt.val(txt.val().replace(/\s/g, ''));
+
+	  if(!txt.val().match(alphanumbers))
+	  {
+		 txt.val("");
+		 $("#msgstatus").text("Username must be alphanumeric");
+	  }
+	  else
+	  {
+		 $("#msgstatus").text(""); 
+	  }
+  }
+  
+  txt.keyup(func).blur(func);
+});
+
+</script>
+          
+
+<script type="text/javascript">
+
+function adduser()
+
+{
+
+username=$("#username").val();
+
+email=$("#email").val();
+
+password=$("#password").val();
+
+place=$("#place").val();
+
+pincode=$("#pincode").val();
+
+phoneno=$("#phoneno").val();
+
+status=$("#status").val();
+
+perpromo=$("#perpromo:checked").val();
+
+perpromosid=$("#perpromosid:checked").val();
+
+pertrans=$("#pertrans:checked").val();
+
+pervoice=$("#pervoice:checked").val();
+
+tempapp=$("#tempapp:checked").val();
+openvoicetemp=$("#openvoicetemp:checked").val();
+
+dlrtype=$("#dlrtype").val();
+smshit=$("#smshit").val();
+permaskingno=$("#permaskingno").val();
+
+socialpack=$("#socialpack").val();
+
+
+if(username=='' || email=='' || password=='' || place=='' || phoneno=='' || status=='')
+
+{
+
+	$("#msgstatus").fadeIn(10).addClass("alert-danger").text("Please Enter Required Values");
+
+}
+
+else
+{
+
+datastring='username='+username+'&email='+email+'&password='+password+'&place='+place+'&phoneno='+phoneno+'&status='+status+'&perpromo='+perpromo+'&perpromosid='+perpromosid+'&pertrans='+pertrans+'&pervoice='+pervoice+'&tempapp='+tempapp+'&openvoicetemp='+openvoicetemp+'&dlrtype='+dlrtype+'&smshit='+smshit+'&socialpack='+socialpack+'&pincode='+pincode+'&permaskingno='+permaskingno+'&logged_in='+logged_in;
+
+if($("#username").val().length < 5)
+				{
+					$("#msgstatus").text("Username Must be Of 5 Characters or more than 5 Characters");
+				}
+				else
+				{
+				
+				
+			 var userid=window.localStorage.getItem("userid");	
+
+	$.ajax({
+
+			type:'POST',
+
+			url:'http://manage.staticking.net/index.php/servicessms/edituserwithidapi/'+userid,
+
+			data:datastring,
+
+			beforeSend:function()
+
+			{
+
+				$("#msgstatus").fadeIn(10).removeClass("alert-danger").addClass("alert-info").text("Please Wait");
+
+			},
+
+			success:function(data)
+
+			{
+
+				$("#msgstatus").fadeIn(10).removeClass("alert-info").addClass("alert-success").text(data);
+
+			}
+
+	});
+				}
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

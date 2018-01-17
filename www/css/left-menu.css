@@ -1,0 +1,128 @@
+
+#menu-toggle {
+    color: #fff;
+    left: 0;
+    padding: 20px 20px 20px 65px;
+    position: absolute;
+    top: 0;
+    z-index: 9999999999999999999999;
+}
+#menu-toggle.open {
+    left: 160px;
+}
+#menu-icon {
+    cursor: pointer;
+    height: 32px;
+    left: 38px;
+    position: absolute;
+    top: 25px;
+    transform: rotate(0deg);
+    transition: all 0.5s ease-in-out 0s;
+    width: 34px;
+}
+#menu-icon span {
+    background: #fff none repeat scroll 0 0;
+    display: block;
+    height: 2px;
+    opacity: 1;
+    position: absolute;
+    transform: rotate(0deg);
+    transition: all 0.25s ease-in-out 0s;
+    width: 50%;
+}
+#menu-icon span:nth-child(2n) {
+    left: 50%;
+}
+#menu-icon span:nth-child(2n+1) {
+    left: 0;
+}
+#menu-icon span:nth-child(1), #menu-icon span:nth-child(2) {
+    top: 2px;
+}
+#menu-icon span:nth-child(3), #menu-icon span:nth-child(4) {
+    top: 12px;
+}
+#menu-icon span:nth-child(5), #menu-icon span:nth-child(6) {
+    top: 22px;
+}
+#menu-icon.open span:nth-child(1), #menu-icon.open span:nth-child(6) {
+    transform: rotate(45deg);
+}
+#menu-icon.open span:nth-child(2), #menu-icon.open span:nth-child(5) {
+    transform: rotate(-45deg);
+}
+#menu-icon.open span:nth-child(1) {
+    left: 44px;
+    padding: 14px;
+    top: -27px;
+    background: #fb6327 url(../images/close-icon.png) !important;
+}
+#menu-icon.open span:nth-child(2) {
+    left: calc(50% - 5px);
+    top: 36px;
+    background: #fff;
+    display: none;
+}
+#menu-icon.open span:nth-child(3) {
+    left: -50%;
+    opacity: 0;
+}
+#menu-icon.open span:nth-child(4) {
+    left: 100%;
+    opacity: 0;
+}
+#menu-icon.open span:nth-child(5) {
+    left: 5px;
+    top: 43px;
+    background: #fff;
+    display: none;
+}
+#menu-icon.open span:nth-child(6) {
+    left: calc(50% - 5px);
+    top: 44px;
+    background: #fff;
+    display: none;
+}
+ul#menu, #menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-top: none;
+}
+#menu {
+    background: #162936 none repeat scroll 0 0;
+    bottom: 0;
+    left: -400px;
+    position: fixed;
+    top: 0;
+    width: 250px;
+    z-index: 9999999;
+}
+
+#menu.open {
+    left: 0;
+}
+
+.submenu-toggle
+{	display:none !important;}
+
+.submenu-toggle.open {
+    background: none;
+    height: 100%;
+    top: -14px;
+	display:none !important;
+    z-index: 5000;
+}
+
+
+
+@media only screen and (min-width:640px) and (max-width:766px) {
+
+.gw-sidebar {
+    overflow: auto;
+    height:300px !important;
+    width: 251px;
+    overflow-x: hidden;
+}
+
+}

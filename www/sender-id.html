@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dashboard</title>
+<link href="images/fav.jpg" rel="shortcut icon" />
+<link href="css/my-css.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/NativePageTransitionsKendoAdapter.js"></script>
+	<script>
+	var app = {
+	
+				initialize: function() {
+					this.bindEvents();
+				},
+
+				bindEvents: function() {
+					document.addEventListener('deviceready', app.onDeviceReady, false);
+				}
+	
+           };
+
+
+	            document.addEventListener("deviceready", function() {
+					
+							 
+				 
+			  // then override any default you want
+			  window.plugins.nativepagetransitions.globalOptions.duration = 700;
+			  window.plugins.nativepagetransitions.globalOptions.iosdelay = 100;
+			  window.plugins.nativepagetransitions.globalOptions.androiddelay = 150;
+			  window.plugins.nativepagetransitions.globalOptions.winphonedelay = 175;
+			  window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 8;
+			  // these are used for slide left/right only currently
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 64;
+			  window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 48;
+			  
+			  
+			
+				  
+			}, false);
+			
+			
+	</script>
+	 <script type="text/javascript" src="js/function.js"></script>
+</head>
+
+<body style="background:#fff; color:#000;" onload="setvalue()">
+   <script>
+	
+ var userdetail= JSON.parse(window.localStorage.getItem("userdetail"));
+ var logged_in= userdetail.id;
+ 
+    function setvalue()
+		{
+		       				 		            
+			            setuserinfo(logged_in);	
+			
+		
+		}
+	</script>			
+<div class="container" style="overflow:hidden;">
+
+
+<div class="header">
+
+<div class="row">
+<div class="col-sm-2 col-xs-2"><div id="menu-toggle">
+<div id="menu-icon">
+
+<div style="background:#000 !important;"><span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span></div>
+
+</div>
+
+</div>
+<div id="menu-overlay"></div>
+<ul id="menu">
+
+</ul>
+
+
+</div>
+
+<div class="col-sm-7 col-xs-7 dasbord-font">Sender ID</div>
+
+
+
+	<div class="col-sm-3 col-xs-3" style="text-align:center;">
+		<div id="loginContainer">
+
+		</div>
+	</div>
+
+</div>
+
+</div>
+
+<div class="available-credits2">
+<div class="row compose">
+<div id="msg_statusnewid" style="display:none;"></div>
+
+<div class="col-sm-6 col-xs-6"><label>Select Route</label>
+
+				
+<select class="form-control" name="routeid" id="newrouteid" required="">
+
+<option value="">Route</option>
+
+<option value="Promosid">Promo. S ID</option>
+
+<option value="Transactional">Transactional</option>
+
+<option value="transactional2">Transactional 2</option>
+
+<option value="apipromosenderid">Promosid API</option>
+
+<option value="apitransactional">Transactional API</option>
+
+
+
+
+</select>
+
+</div>
+
+
+
+<div class="col-sm-6 col-xs-6"><label>Sender ID</label>
+<input type="text" name="addnewsenderid" id="addnewsenderid" maxlength="6" class="form-control input-box" placeholder="Enter Sender ID " required>
+
+</div>
+
+
+
+
+
+
+<div class="col-sm-12">
+<label>Sms Content</label>
+<textarea class="form-control composse-box" rows="3" name="samplecontentmsg" id="samplecontentmsg" placeholder="" style="margin:5px 0px;"></textarea>
+
+</div>
+
+
+<div class="col-md-12">
+<input type="button" name="submitsender" onclick="return addnewsendersnew()" class="btn btn-primary inner-button" value="Send for Approval" style="margin-top:20px;">
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div style="margin:40px; float:left;"></div>
+
+<div id="footercredits"  class="footer-credits">
+
+
+</div>
+
+
+
+
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+
+<script src="js/left-menuhtml.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/bs_leftnavi.css">
+<link rel="stylesheet" href="css/login.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/left-menu.css" rel="stylesheet" type="text/css" />
+<script src="js/on-click.js"></script>
+<script src="js/login.js"></script>
+<script src="js/bs_leftnavi.js"></script>
+<script src="js/fontawesome.js"></script> 
+<script src="js/left-menu.js"></script>
+<script src="js/left-menu2.js"></script>
+
+
+ <script type="text/javascript">
+
+ 
+
+ function addnewsendersnew()
+  {
+
+		inroute=jQuery("#newrouteid").val();
+
+			insenderid=jQuery("#addnewsenderid").val();
+			
+			msgcontent=jQuery("#samplecontentmsg").val();
+
+			if(inroute=='')
+
+			{
+
+				jQuery("#msg_statusnewid").fadeIn(0).addClass("alert-danger").text("Please Select Route");
+
+			}
+
+			else
+
+			{
+
+				if(insenderid=='')
+
+				{
+
+				jQuery("#msg_statusnewid").fadeIn(0).addClass("alert-danger").text("Please Enter Sender ID");	
+
+				}
+
+				else
+
+				{
+
+					if(insenderid.length < 6)
+
+					{
+
+					jQuery("#msg_statusnewid").fadeIn(0).addClass("alert-danger").text("Sender Id Not Less Than 6 Characters");	
+
+					}
+
+					else
+
+					{
+
+						if(insenderid.length > 6)
+
+						{
+
+						jQuery("#msg_statusnewid").fadeIn(0).addClass("alert-danger").text("Sender Id Not Greater Than 6 Characters");		
+
+						}
+
+						else
+						{
+							if(msgcontent=='')
+							{
+								
+							jQuery("#msg_statusnewid").fadeIn(0).addClass("alert-danger").text("Please Enter Sample Message");	
+							}
+							else
+							{
+
+							if(insenderid.length == 6)
+							{
+
+								datastringsender='inroute='+inroute+'&insenderid='+insenderid+'&msgcontent='+msgcontent+'&logged_in='+logged_in;
+
+								jQuery.ajax({
+
+										type:'POST',
+
+										url:'http://manage.staticking.net/index.php/servicessms/senderidapprovalapi',
+
+										data:datastringsender,
+
+										beforeSend:function()
+
+										{
+
+										jQuery("#msg_statusnewid").fadeIn(0).removeClass("alert-danger").addClass("alert-info").text("Please Wait....");	
+
+										},
+
+										success:function(data)
+
+										{
+
+										jQuery("#msg_statusnewid").fadeIn(0).removeClass("alert-info").addClass("alert-success").html(data);
+
+										jQuery("#newrouteid").val("");
+
+										jQuery("#addnewsenderid").val("");
+
+
+
+										}
+
+										
+
+									
+
+								});
+
+								
+
+								
+
+							}
+							}
+
+							
+
+							
+
+						}
+
+						
+
+						
+
+					}
+
+					
+
+				}
+
+			}
+
+
+ }
+ </script>
+
+</body>
+</html>
