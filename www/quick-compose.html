@@ -79,7 +79,7 @@
 									contentType: 'application/json',
 									 dataType: 'jsonp',
 									
-									url:'http://manage.staticking.net/index.php/servicessms/composesmsapi',
+									url:'http://control.textlab.in/index.php/servicessms/composesmsapi',
 									data:datastring,
 									
 
@@ -401,7 +401,7 @@ $(document).ready(function()
 			$("#labelsms, #wordsremain, #labelchar, #countsms, #smscontent").hide();
 			$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/gettemplatesapi',
+					url:'http://control.textlab.in/index.php/servicessms/gettemplatesapi',
 					data:'templates='+routch+'&logged_in='+logged_in,
 					beforeSend:function()
 					{
@@ -583,7 +583,7 @@ datastring='routeid='+routeid+'&senderid='+senderid+'&contactnumberst='+contactn
 
 					type:'POST',
 
-					url:'http://manage.staticking.net/index.php/servicessms/sendsmsapi',
+					url:'http://control.textlab.in/index.php/servicessms/sendsmsapi',
 
 					data:datastring,
 
@@ -658,7 +658,7 @@ $(document).ready(function() {
 					
 				$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/getsenderidbyrouteapi',
+					url:'http://control.textlab.in/index.php/servicessms/getsenderidbyrouteapi',
 					data:'routbval='+routbval+'&logged_in='+logged_in,
 					
 					success:function(data)
@@ -763,7 +763,7 @@ $(document).ready(function() {
 		{
 			$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/getsmscsofroute/'+roytu,
+					url:'http://control.textlab.in/index.php/servicessms/getsmscsofroute/'+roytu,
 					data:'route='+roytu+'&logged_in='+logged_in,
 					beforeSend:function()
 					{

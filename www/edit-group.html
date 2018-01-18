@@ -105,7 +105,7 @@
                 contentType: 'application/json',
 				 dataType: 'jsonp',
 				
-				url:'http://manage.staticking.net/index.php/servicessms/editgroupapi',
+				url:'http://control.textlab.in/index.php/servicessms/editgroupapi',
 				data:datastring,
 								
 				success:function(data)
@@ -263,7 +263,7 @@
 </div>
    <div class="col-md-12" style="display:none;">
 
-												<form method="post" action="http://manage.staticking.net/index.php/servicessms/uploadcontactsapi" enctype="multipart/form-data">
+												<form method="post" action="http://control.textlab.in/index.php/servicessms/uploadcontactsapi" enctype="multipart/form-data">
 
                                                 <input type="file" id="contactnosfile" name="contactnosfile">
 
@@ -380,7 +380,7 @@ $(document).ready(function()
 
 					type:'POST',
 
-					url:'http://manage.staticking.net/index.php/servicessms/editoldgroupapi/'+grpid,
+					url:'http://control.textlab.in/index.php/servicessms/editoldgroupapi/'+grpid,
 
 					data:datastring,
 
@@ -444,7 +444,7 @@ $.each(files, function(key, value)
 
 
 $.ajax({
-    url: 'http://manage.staticking.net/index.php/servicessms/uploadcontactsapi',
+    url: 'http://control.textlab.in/index.php/servicessms/uploadcontactsapi',
     type: 'POST',
     data: data,
    

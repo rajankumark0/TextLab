@@ -67,7 +67,7 @@ var googleapi = {
         googleapi.authorize({
             client_id: '95225454408-ouikghqqv3ggs7oggm1bgba8kesiqdm1.apps.googleusercontent.com',
             client_secret: 'b6bOdet6evoQe7ANsS16N8d5',
-            redirect_uri: 'http://manage.staticking.net/index.php/pages/login',
+            redirect_uri: 'http://control.textlab.in/index.php/pages/login',
             scope: 'https://www.googleapis.com/auth/userinfo.email'
         }).done(function(data) {
 							

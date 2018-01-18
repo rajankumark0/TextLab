@@ -1,7 +1,7 @@
 var config =  {
 				    "data":[{
-					    "baseurl":"http://manage.staticking.net/webservice/webservice.php",
-					    "basicurl":"http://manage.staticking.net/",
+					    "baseurl":"http://control.textlab.in/webservice/webservice.php",
+					    "basicurl":"http://control.textlab.in/",
 					    "app_name" :"DataOxy",
 					    "bundle_id" : "com.dataoxy.com",
 					  "google_ios_clientid":"",

@@ -99,7 +99,7 @@
 			 var editsellerid=window.localStorage.getItem("editsellerid");
 				$.ajax({
 					type:'POST',
-					url:"http://manage.staticking.net/index.php/servicessms/editresellerapi",
+					url:"http://control.textlab.in/index.php/servicessms/editresellerapi",
 					data:'logged_in='+logged_in+'&editsellerid='+editsellerid,
 					success:function(data)
 					{
@@ -384,7 +384,7 @@ else
 
 			type:'POST',
 
-			url:'http://manage.staticking.net/index.php/servicessms/editresellerwithidapi/'+editsellerid,
+			url:'http://control.textlab.in/index.php/servicessms/editresellerwithidapi/'+editsellerid,
 
 			data:datastring,
 

@@ -85,7 +85,7 @@
 		   
 		          $.ajax({
 							type:'POST',
-							url:"http://manage.staticking.net/index.php/servicessms/usernotificationsapi",
+							url:"http://control.textlab.in/index.php/servicessms/usernotificationsapi",
 							data:'logged_in='+logged_in,
 							
 							success:function(data)
@@ -98,7 +98,7 @@
 						  });
 						  
 						  
-						  $.get('http://manage.staticking.net/index.php/servicessms/notireadapi?notiread=yes&logged_in='+logged_in,function(data)
+						  $.get('http://control.textlab.in/index.php/servicessms/notireadapi?notiread=yes&logged_in='+logged_in,function(data)
 							{
 								if(data=='success')
 								{

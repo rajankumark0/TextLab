@@ -328,7 +328,7 @@ $(document).ready(function()
 							type:'POST',
 							 contentType: 'application/json',
 				             dataType: 'jsonp',
-							url:'http://manage.staticking.net/index.php/services/registeruserapi',
+							url:'http://control.textlab.in/index.php/services/registeruserapi',
 							data:$("#registerform").serialize(),
 							beforeSend:function()
 							{
@@ -388,7 +388,7 @@ $("#verifymobno,#resendverifymobno").on('click',function()
 				type:'POST',
 				 contentType: 'application/json',
 				 dataType: 'jsonp',
-				url:"http://manage.staticking.net/index.php/services/sendotpverifymobileapi",
+				url:"http://control.textlab.in/index.php/services/sendotpverifymobileapi",
 				data:'mobileno='+$("#phoneno").val(),
 				beforeSend: function()
 				{

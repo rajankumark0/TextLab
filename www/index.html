@@ -61,7 +61,7 @@
 	{
 	
 	
-	      	var url = "http://manage.staticking.net/index.php/services/connectionapi";
+	      	var url = "http://control.textlab.in/index.php/services/connectionapi";
 		   $.getJSON(url, function(data) {
 			
 			setvalue();
@@ -93,7 +93,7 @@
             		  $.ajax({
 						type:'POST',
 						
-						url:"http://manage.staticking.net/index.php/services/homedataapi",
+						url:"http://control.textlab.in/index.php/services/homedataapi",
 						data:'logged_in='+logged_in,
 						success:function(data)
 						{

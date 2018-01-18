@@ -89,7 +89,7 @@
 		{
             $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/viewsmstemplateapi",
+				url:"http://control.textlab.in/index.php/servicessms/viewsmstemplateapi",
 				data:'logged_in='+logged_in,
 				success:function(data)
 				{
@@ -107,7 +107,7 @@
 		 
 		    $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/approvetemplateapi",
+				url:"http://control.textlab.in/index.php/servicessms/approvetemplateapi",
 				data:'logged_in='+logged_in+'&tempid='+tempid,
 				success:function(data)
 				{
@@ -124,7 +124,7 @@
 		 
 		            $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/deletesmstemplateapi",
+				url:"http://control.textlab.in/index.php/servicessms/deletesmstemplateapi",
 				data:'logged_in='+logged_in+'&tempid='+tempid,
 				success:function(data)
 				{
@@ -299,7 +299,7 @@ $("#dispform").on('submit',function(ev)
 	
 	$.ajax({
 			type:'POST',
-			url:'http://manage.staticking.net/index.php/servicessms/disapprovetemplateapi/'+$("#templateidy").val(),
+			url:'http://control.textlab.in/index.php/servicessms/disapprovetemplateapi/'+$("#templateidy").val(),
 			data:$("#dispform").serialize(),
 			beforeSend:function()
 			{

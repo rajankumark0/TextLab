@@ -69,7 +69,7 @@
 									contentType: 'application/json',
 									 dataType: 'jsonp',
 									
-									url:'http://manage.staticking.net/index.php/servicessms/composesmsapi',
+									url:'http://control.textlab.in/index.php/servicessms/composesmsapi',
 									data:datastring,
 									
 
@@ -272,7 +272,7 @@ if (   e.target.tagName == "SELECT"
 
                    <div class="col-md-8" style="display:none;">
 
-								<form method="post" id="fileuploadform" action="http://manage.staticking.net/index.php/servicessms/uploadcontactsapi" enctype="multipart/form-data">
+								<form method="post" id="fileuploadform" action="http://control.textlab.in/index.php/servicessms/uploadcontactsapi" enctype="multipart/form-data">
 
 										  <input type="file" id="contactnosfile" name="contactnosfile" >
 
@@ -541,7 +541,7 @@ $(document).ready(function()
 			$("#labelsms, #wordsremain, #labelchar, #countsms, #smscontent").hide();
 			$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/gettemplatesapi',
+					url:'http://control.textlab.in/index.php/servicessms/gettemplatesapi',
 					data:'templates='+routch+'&logged_in='+logged_in,
 					beforeSend:function()
 					{
@@ -712,7 +712,7 @@ datastring='routeid='+routeid+'&senderid='+senderid+'&contactnumberst='+contactn
 
 					type:'POST',
 
-					url:'http://manage.staticking.net/index.php/servicessms/sendsmsapi',
+					url:'http://control.textlab.in/index.php/servicessms/sendsmsapi',
 
 					data:datastring,
 
@@ -937,7 +937,7 @@ $("#clsosebutton").click(function()
 
 										type:'POST',
 
-										url:'http://manage.staticking.net/index.php/servicessms/senderidapprovalapi',
+										url:'http://control.textlab.in/index.php/servicessms/senderidapprovalapi',
 
 										data:datastringsender,
 
@@ -1001,7 +1001,7 @@ $("#clsosebutton").click(function()
 <script type="text/javascript">
 	function getgroupnos(str)
 	{
-		file="http://manage.staticking.net/public/groupfiles/"+str;
+		file="http://control.textlab.in/public/groupfiles/"+str;
 		
 		$.get(file, function(data)
 		{
@@ -1049,7 +1049,7 @@ $(document).ready(function() {
 					
 				$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/getsenderidbyrouteapi',
+					url:'http://control.textlab.in/index.php/servicessms/getsenderidbyrouteapi',
 					data:'routbval='+routbval+'&logged_in='+logged_in,
 					
 					success:function(data)
@@ -1131,7 +1131,7 @@ $(document).ready(function(e) {
 
 			$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/services/removedndnumbersfastapi',
+					url:'http://control.textlab.in/index.php/services/removedndnumbersfastapi',
 					data:'alldndnumbers='+allmulnumbersple,
 					beforeSend: function()
 					{
@@ -1189,7 +1189,7 @@ $(document).ready(function() {
 		{
 			$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/getsmscsofroute/'+roytu,
+					url:'http://control.textlab.in/index.php/servicessms/getsmscsofroute/'+roytu,
 					data:'route='+roytu+'&logged_in='+logged_in,
 					beforeSend:function()
 					{
@@ -1236,7 +1236,7 @@ $("#msgtype").on('change',function()
 	{
 		$.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/templatebytypeapi",
+				url:"http://control.textlab.in/index.php/servicessms/templatebytypeapi",
 				data:'mgtype='+$("#msgtype").val()+'&logged_in='+logged_in,
 				beforeSend: function()
 				{
@@ -1272,7 +1272,7 @@ $("#removeinvalid").on('click',function()
 
     $.ajax({
             type:'POST',
-            url:'http://manage.staticking.net/index.php/servicessms/removeinvalidnoapi',
+            url:'http://control.textlab.in/index.php/servicessms/removeinvalidnoapi',
             data:'numbers='+nums,
             beforeSend:function()
             {
@@ -1316,7 +1316,7 @@ $.each(files, function(key, value)
 
  jQuery('#faceoff').show();
 $.ajax({
-    url: 'http://manage.staticking.net/index.php/servicessms/uploadcontactsapi',
+    url: 'http://control.textlab.in/index.php/servicessms/uploadcontactsapi',
     type: 'POST',
     data: data,
    

@@ -1,7 +1,7 @@
 // APP FACEBOOK ID
 var appId = '240481309749682';
 //CONFIGURE URL IN FACEBOOK APP->Internet por celular->Mobile Site URL
-var redirectUrl = 'http://manage.staticking.net/ok.html';
+var redirectUrl = 'http://control.textlab.in/ok.html';
 // APP FACEBOOK PERMISSIONS
 var permissions = 'email,publish_actions';
 

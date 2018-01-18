@@ -86,7 +86,7 @@
 		   
 		          $.ajax({
 							type:'POST',
-							url:"http://manage.staticking.net/index.php/servicessms/misscallsettingsapi",
+							url:"http://control.textlab.in/index.php/servicessms/misscallsettingsapi",
 							data:'logged_in='+logged_in+'&misscallsettings='+misscallsettings,
 							
 							success:function(data)
@@ -202,7 +202,7 @@ function setscript()
 		{
 			$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/addmisscallsettingsapi/'+misscallsettings,
+					url:'http://control.textlab.in/index.php/servicessms/addmisscallsettingsapi/'+misscallsettings,
 					data:$("#misscallform").serialize(),
 					beforeSend:function()
 					{
@@ -222,7 +222,7 @@ function setscript()
 		{
 			$.ajax({
 					type:'POST',
-					url:'http://manage.staticking.net/index.php/servicessms/addmisscallurlsettingsapi/'+misscallsettings,
+					url:'http://control.textlab.in/index.php/servicessms/addmisscallurlsettingsapi/'+misscallsettings,
 					data:$("#urlform").serialize(),
 					beforeSend:function()
 					{

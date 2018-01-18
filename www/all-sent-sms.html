@@ -88,7 +88,7 @@
 									contentType: 'application/json',
 									 dataType: 'jsonp',
 									
-									url:'http://manage.staticking.net/index.php/servicessms/allsentsmsoption',
+									url:'http://control.textlab.in/index.php/servicessms/allsentsmsoption',
 									data:datastring,
 	
 									success:function(data)
@@ -128,7 +128,7 @@
 		{
             $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				url:"http://control.textlab.in/index.php/servicessms/allsentsmsapi",
 				data:'page='+pageno+'&logged_in='+logged_in,
 				success:function(data)
 				{
@@ -149,7 +149,7 @@ function querystring(senderids)
  
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				url:"http://control.textlab.in/index.php/servicessms/allsentsmsapi",
 				data:'page='+pageno+'&logged_in='+logged_in+'&senderids='+senderids,
 				success:function(data)
 				{
@@ -166,7 +166,7 @@ function  userquerystring()
   var usernameid=jQuery('#usernameid').val();
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				url:"http://control.textlab.in/index.php/servicessms/allsentsmsapi",
 				data:'page='+pageno+'&logged_in='+logged_in+'&usernameid='+usernameid,
 				success:function(data)
 				{
@@ -187,7 +187,7 @@ function  smquerystring()
   var smsid=jQuery('#smsid').val();
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				url:"http://control.textlab.in/index.php/servicessms/allsentsmsapi",
 				data:'page='+pageno+'&logged_in='+logged_in+'&smsid='+smsid,
 				success:function(data)
 				{
@@ -209,7 +209,7 @@ function  datequerystring()
    var todate=jQuery('#todate').val();
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				url:"http://control.textlab.in/index.php/servicessms/allsentsmsapi",
 				data:'page='+pageno+'&logged_in='+logged_in+'&fromdate='+fromdate+'&todate='+todate,
 				success:function(data)
 				{
@@ -231,7 +231,7 @@ function bulkdlrs()
     var route=jQuery('#routeid').val();
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/allsentsmsapi",
+				url:"http://control.textlab.in/index.php/servicessms/allsentsmsapi",
 				data:'logged_in='+logged_in+'&fromdate='+fromdate+'&todate='+todate+'&route='+route,
 				success:function(data)
 				{
@@ -250,7 +250,7 @@ function transactionaldlr(smsid)
  
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/transactionaldlrapi",
+				url:"http://control.textlab.in/index.php/servicessms/transactionaldlrapi",
 				data:'logged_in='+logged_in+'&smsid='+smsid,
 				success:function(data)
 				{
@@ -267,7 +267,7 @@ function internationaldlr(smsid)
  
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/internationaldlrapi",
+				url:"http://control.textlab.in/index.php/servicessms/internationaldlrapi",
 				data:'logged_in='+logged_in+'&smsid='+smsid,
 				success:function(data)
 				{
@@ -285,7 +285,7 @@ function promotionaldlr(smsid)
  
      $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/promotionaldlrapi",
+				url:"http://control.textlab.in/index.php/servicessms/promotionaldlrapi",
 				data:'logged_in='+logged_in+'&smsid='+smsid,
 				success:function(data)
 				{
@@ -557,7 +557,7 @@ $=jQuery;
 				{
 					$.ajax({
 							type:'POST',
-							url:'http://manage.staticking.net/index.php/servicessms/viewdlrapi',
+							url:'http://control.textlab.in/index.php/servicessms/viewdlrapi',
 							data:'checkid='+check+'&logged_in='+logged_in,
 							beforeSend:function()
 							{

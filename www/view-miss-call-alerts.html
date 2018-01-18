@@ -71,7 +71,7 @@
 		{
             $.ajax({
 				type:'POST',
-				url:"http://manage.staticking.net/index.php/servicessms/viewmisscallapi",
+				url:"http://control.textlab.in/index.php/servicessms/viewmisscallapi",
 				data:'logged_in='+logged_in,
 				success:function(data)
 				{
@@ -294,7 +294,7 @@ $(document).ready(function(e) {
 		jQuery('#faceoff').show();
 		$.ajax({
 			 type:'GET',
-			 url:'http://manage.staticking.net/index.php/servicessms/viewmisscallapi',
+			 url:'http://control.textlab.in/index.php/servicessms/viewmisscallapi',
 			 data:'number='+number+'&logged_in='+logged_in,
 			
 			 success: function(data)
@@ -317,7 +317,7 @@ $(document).ready(function(e) {
 		
 		$.ajax({
 			 type:'GET',
-			 url:'http://manage.staticking.net/index.php/servicessms/viewmisscallapi',
+			 url:'http://control.textlab.in/index.php/servicessms/viewmisscallapi',
 			 data:'status='+status+'&logged_in='+logged_in,
 			
 			 success: function(data)

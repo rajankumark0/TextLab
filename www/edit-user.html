@@ -96,7 +96,7 @@
 			 var userid=window.localStorage.getItem("userid");
 				$.ajax({
 					type:'POST',
-					url:"http://manage.staticking.net/index.php/servicessms/edituserapi",
+					url:"http://control.textlab.in/index.php/servicessms/edituserapi",
 					data:'logged_in='+logged_in+'&userid='+userid,
 					success:function(data)
 					{
@@ -382,7 +382,7 @@ if($("#username").val().length < 5)
 
 			type:'POST',
 
-			url:'http://manage.staticking.net/index.php/servicessms/edituserwithidapi/'+userid,
+			url:'http://control.textlab.in/index.php/servicessms/edituserwithidapi/'+userid,
 
 			data:datastring,
 

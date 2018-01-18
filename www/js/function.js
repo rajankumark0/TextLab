@@ -97,7 +97,7 @@
 					
 					 $.ajax({
 						type:'POST',
-						url:"http://manage.staticking.net/index.php/servicessms/unreadnotificationapi",
+						url:"http://control.textlab.in/index.php/servicessms/unreadnotificationapi",
 						data:'logged_in='+logged_in,
 						success:function(data)
 						{
