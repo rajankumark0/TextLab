@@ -12,7 +12,7 @@
         href="com.textlab.com">
            TextLab team
         </author>
-        <uses-sdk tools:overrideLibrary="org.apache.cordova,com.library.plugin" />
+    
     	
 		<plugin name="cordova-plugin-console" spec="~1.1.0" />
     	
@@ -23,7 +23,7 @@
 		 
 		 <plugin name="cordova-plugin-inappbrowser" spec="~2.0.1" />
 		
-    	<plugin name="cordova-plugin-splashscreen"  spec="~2.0.1" />
+    	<plugin name="cordova-plugin-splashscreen"   />
     	<plugin name="cordova-plugin-contacts" spec="~2.3.0" />
         
 		
