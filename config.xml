@@ -23,7 +23,7 @@
 		 
 		 <plugin name="cordova-plugin-inappbrowser" spec="~2.0.1" />
 		
-    	<plugin name="cordova-plugin-splashscreen"   />
+    	<plugin name="cordova-plugin-splashscreen"  spec="~5.0.0" />
     	<plugin name="cordova-plugin-contacts" spec="~2.3.0" />
         
 		
@@ -86,7 +86,7 @@
 		<gap:splash src="resource/splash/1280x720.png" gap:platform="android" width="1280" height="720" />
 		
     
-	         <preference name="phonegap-version" value="cli-6.5.0" /> 
+	         <preference name="phonegap-version" value="cli-7.0.1" /> 
 			  <preference name="SplashScreen" value="splash" />
 		
               <preference name="SplashScreenDelay" value="5000" />
@@ -94,7 +94,7 @@
 				
 				  <preference name="ShowSplashScreenSpinner" value="false" />
 				  <preference name="disable-cursor" value="false"/>
-                  <preference name="android-minSdkVersion" value="14"/>
+                  <preference name="android-minSdkVersion" value="15"/>
                 <preference name="orientation" value="portrait" />
                 <preference name="target-device" value="universal" />
                 <preference name="DisallowOverscroll" value="true" />
