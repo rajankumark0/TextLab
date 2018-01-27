@@ -13,12 +13,7 @@
            TextLab team
         </author>
     
-   <engines>
-    <engine name="cordova" version=">=5.0.0"/>
-    <engine name="cordova-android" version="
-      <6.3.0"/>
-    </engines>
-	
+    	
 		<plugin name="cordova-plugin-console" spec="~1.1.0" />
     	
     	
