@@ -12,7 +12,7 @@
         href="com.textlab.com">
            TextLab team
         </author>
-    
+        <uses-sdk tools:overrideLibrary="org.apache.cordova,com.library.plugin" />
     	
 		<plugin name="cordova-plugin-console" spec="~1.1.0" />
     	
