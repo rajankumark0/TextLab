@@ -1,5 +1,5 @@
 // APP FACEBOOK ID
-var appId = '240481309749682';
+var appId = '1789479104417252';
 //CONFIGURE URL IN FACEBOOK APP->Internet por celular->Mobile Site URL
 var redirectUrl = 'http://control.textlab.in/ok.html';
 // APP FACEBOOK PERMISSIONS
